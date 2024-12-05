@@ -1,0 +1,14 @@
+:root {
+    --body-1-font-family: "Poppins", Helvetica;
+    --body-1-font-weight: 400;
+    --body-1-font-size: 24px;
+    --body-1-letter-spacing: -0.24px;
+    --body-1-line-height: 32px;
+    --body-1-font-style: normal;
+    --headline-4-font-family: "DM Sans", Helvetica;
+    --headline-4-font-weight: 700;
+    --headline-4-font-size: 32px;
+    --headline-4-letter-spacing: -0.32px;
+    --headline-4-line-height: 40px;
+    --headline-4-font-style: normal;
+}

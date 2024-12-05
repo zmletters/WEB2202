@@ -1,4 +1,30 @@
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .login-container {
     display: flex;
-    height: max-content;
+    flex-direction: row;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 80%;
+    max-width: 1000px;
+    height: 500px;
+}
+
+.left-columnn {
+    flex: 1;
+    background-image: url("/img/autumnleaves.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.right-column {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
