@@ -1,26 +1,23 @@
 /* Importing the Meyer Reset CSS to normalize styles across browsers */
 @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
 
-/* Global Styles */
 * {
     -webkit-font-smoothing: antialiased;
     box-sizing: border-box;
 }
 
-/* Body and HTML styles */
 html,
 body {
-    margin: 0;
+    margin: 0px;
     height: 100%;
 }
 
-/* Focus styles for buttons */
+/* a blue color as a generic focus style */
 button:focus-visible {
     outline: 2px solid #4a90e2 !important;
     outline: -webkit-focus-ring-color auto 5px !important;
 }
 
-/* Anchor styles */
 a {
     text-decoration: none;
 }
