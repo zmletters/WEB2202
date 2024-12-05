@@ -1,0 +1,29 @@
+/* Resetting default styles using Meyer Reset */
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+
+/* Universal styles */
+* {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    /* Improved text rendering */
+}
+
+html,
+body {
+    margin: 0;
+    height: 100%;
+}
+
+/* Focus styles for buttons */
+button:focus-visible {
+    outline: 2px solid #4a90e2;
+    /* Blue outline for focus visibility */
+    outline-offset: 5px;
+    /* Offset outline to avoid overlapping content */
+}
+
+/* Link styles */
+a {
+    text-decoration: none;
+    /* Remove underline from links */
+}
