@@ -12,9 +12,7 @@
 .sign-in .aside {
     display: flex;
     flex-wrap: wrap;
-    /* width: 705px; */
     width: 65%;
-    /* height: 832px; */
     height: 100%;
     align-items: flex-start;
     gap: 0px 599px;
@@ -33,14 +31,6 @@
     flex-grow: 1;
     align-items: flex-start;
     position: relative;
-}
-
-.sign-in .rectangle {
-    position: relative;
-    align-self: stretch;
-    width: 100%;
-    height: 158px;
-    margin-bottom: -41.00px;
 }
 
 .sign-in .text-wrapper {
@@ -114,9 +104,12 @@
     gap: 12px;
     position: relative;
     flex: 0 0 auto;
+    font-family: var(--headings-h2-font-family);
+    font-weight: var(--headings-h2-font-weight);
+    font-size: var(--headings-h2-font-size);
 }
 
-.sign-in .title {
+/* .sign-in .title {
     position: relative;
     align-self: stretch;
     margin-top: -1.00px;
@@ -127,7 +120,7 @@
     letter-spacing: var(--headings-h2-letter-spacing);
     line-height: var(--headings-h2-line-height);
     font-style: var(--headings-h2-font-style);
-}
+} */
 
 .sign-in .form {
     display: flex;
