@@ -1,0 +1,42 @@
+.signup {
+    height: 100%;
+    width: 100%;
+    min-width: 1280px;
+    display: flex;
+    position: relative;
+}
+
+.signup .leftcol {
+    width: 65%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    background-image: url(/img/signin.jpg);
+    background-size: cover;
+    /* background-position: 50% 50%; */
+}
+
+.signup .tagline {
+    width: fit-content;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 500;
+    font-size: 30;
+}
+
+.signup .rightcol {
+    width: 35%;
+    height: inherit;
+    position: relative;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.signup .signup-form {
+    display: flex;
+    position: relative;
+    flex: 1;
+    flex-direction: column;
+}
