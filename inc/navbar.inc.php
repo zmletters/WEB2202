@@ -15,7 +15,6 @@
             </a>
             <?php
             // Database query to fetch cart item count
-            include('mysqli_connect.php'); // Include database connection
             if (isset($_SESSION['user_id'])) {
                 $userId = $_SESSION['user_id'];
                 $query = "SELECT SUM(quantity) AS total_items FROM cart WHERE user_id = ?";

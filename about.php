@@ -1,5 +1,6 @@
 <?php
 session_start();
+require('mysqli_connect.php');
 ?>
 
 <!DOCTYPE html>

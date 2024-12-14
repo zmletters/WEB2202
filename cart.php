@@ -11,8 +11,9 @@ session_start();
 include('mysqli_connect.php'); // Include database connection file
 
 // Fetch cart data with product details from the database
-$userId = $_SESSION['user_id']; // Assuming user_id is stored in session
-$query = "
+if (isset($_SESSION['user_id'])) {
+    $userId = $_SESSION['user_id']; // Assuming user_id is stored in session
+    $query = "
     SELECT 
         c.id AS cart_id, 
         c.quantity, 
@@ -24,16 +25,20 @@ $query = "
     INNER JOIN products p ON c.product_id = p.product_id
     WHERE c.user_id = ?
 ";
-$stmt = $dbc->prepare($query);
-$stmt->bind_param('i', $userId);
-$stmt->execute();
-$result = $stmt->get_result();
+    $stmt = $dbc->prepare($query);
+    $stmt->bind_param('i', $userId);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-$cartItems = [];
-while ($row = $result->fetch_assoc()) {
-    $cartItems[] = $row;
+    $cartItems = [];
+    while ($row = $result->fetch_assoc()) {
+        $cartItems[] = $row;
+    }
+    $stmt->close();
+} else {
+    $cartItems = [];
 }
-$stmt->close();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

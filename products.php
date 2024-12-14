@@ -1,15 +1,10 @@
 <?php
 
-// Database connection
+session_start();
+
 require('mysqli_connect.php');
 
-// Fetch products from the database
-$sql = "SELECT * FROM products";
-$result = $dbc->query($sql);
 
-if (!$result) {
-    die("Error fetching products: " . $conn->error);
-}
 ?>
 
 <!DOCTYPE html>
@@ -42,6 +37,14 @@ if (!$result) {
         <h2>All Products</h2>
         <div class="product-list">
             <?php
+            // Fetch products from the database
+            $sql = "SELECT * FROM products"; // Keep this simple to avoid filtering.
+
+            $result = $dbc->query($sql);
+
+            if (!$result) {
+                die("Error fetching products: " . $dbc->error);
+            }
             // Check if there are any products
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {

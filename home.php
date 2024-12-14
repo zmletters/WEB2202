@@ -1,3 +1,9 @@
+<?php
+session_start();
+require('mysqli_connect.php');
+?>
+
+
 <!DOCTYPE html>
 <html>
 
@@ -10,10 +16,7 @@
     <link rel="stylesheet" href="css/footer.css" />
 </head>
 
-<?php
-session_start()
 
-?>
 
 <body>
     <!-- Navbar -->
