@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/globals.css" />
     <link rel="stylesheet" href="css/styleguide.css" />
     <link rel="stylesheet" href="css/home.css" />
+    <link rel="stylesheet" href="css/navbar.css" />
 </head>
 
 <?php
@@ -67,6 +68,7 @@ session_start()
                 </div>
                 <div class="divider-2"></div>
             </div>
+
             <div class="overlap">
                 <button class="label-wrapper">
                     <div class="label-2">SHOP

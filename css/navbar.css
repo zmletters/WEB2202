@@ -1,0 +1,87 @@
+/* Navbar Container */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #8FAF86;
+    padding: 0 20px;
+    height: 80px;
+    color: #FFFFFF;
+}
+
+/* Logo */
+.navbar-logo .navbar-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Links */
+.navbar-links {
+    display: flex;
+    gap: 20px;
+}
+
+.navbar-link {
+    text-decoration: none;
+    color: #FFFFFF;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.navbar-link:hover {
+    color: #E5E8EB;
+}
+
+/* Right Section */
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+}
+
+/* Cart */
+.navbar-cart {
+    position: relative;
+}
+
+.cart-badge {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background-color: #18191D;
+    color: #FFFFFF;
+    font-size: 12px;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+/* User Action */
+.navbar-user {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.user-action a {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.user-action a:hover {
+    color: #E5E8EB;
+}

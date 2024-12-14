@@ -13,9 +13,9 @@ https://maheshsamudra.medium.com/creating-a-simple-php-mvc-framework-from-scratc
 login
 logout
 signup
-
 home
 products
+
 products-info
 
 admin

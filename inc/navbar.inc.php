@@ -1,50 +1,32 @@
-<!-- navbar.inc.php -->
-
-<div class="nav">
-    <div class="nav-content">
-        <div class="navbar">
-            <button class="button">
-                <div
-                    class="label">FRESHARA</div>
-            </button>
-            <div class="divider"></div>
-            <div class="text-wrapper-5">Home</div>
-            <div class="text-wrapper-5">Products</div>
-            <div class="text-wrapper-5">About Us</div>
-            <div class="text-wrapper-5">Contact</div>
+<div class="navbar">
+    <div class="navbar-logo">
+        <span class="navbar-title">FRESHARA</span>
+    </div>
+    <div class="navbar-links">
+        <a href="index.php" class="navbar-link">Home</a>
+        <a href="products.php" class="navbar-link">Products</a>
+        <a href="about.php" class="navbar-link">About Us</a>
+        <a href="contact.php" class="navbar-link">Contact</a>
+    </div>
+    <div class="navbar-right">
+        <div class="navbar-cart">
+            <img src="img/shopping-cart-10.svg" alt="Cart" class="icon">
+            <span class="cart-badge">2</span>
         </div>
-        <div class="frame-wrapper">
-            <div class="frame-9">
-                <div class="overlap-group-wrapper">
-                    <div class="overlap-group-2">
-                        <div class="button-icon-only"><img
-                                class="shopping-cart-2"
-                                src="img/shopping-cart-10.svg" /></div>
-                        <div class="badge-primary">
-                            <div
-                                class="text-wrapper-6">2</div>
-                        </div>
-                    </div>
-                </div>
-                <img class="icons-bell-line"
-                    src="img/line.svg" />
-                <div class="div-wrapper">
-                    <div class="frame-10">
-                        <img class="frame-11"
-                            src="img/frame-1027.svg" />
-                        <div class="text-wrapper-5">
-                            <?php
-                            if (isset($_SESSION['first_name'])) {
-                                echo htmlspecialchars($_SESSION['first_name']);
-                            } else {
-                                echo '<a href="login.php">Sign In</a>';
-                            }
-                            ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="navbar-notification">
+            <img src="img/bell-icon.svg" alt="Notifications" class="icon">
+        </div>
+        <div class="navbar-user">
+            <img src="img/user-icon.svg" alt="User" class="icon">
+            <span class="user-action">
+                <?php
+                if (isset($_SESSION['first_name'])) {
+                    echo htmlspecialchars($_SESSION['first_name']);
+                } else {
+                    echo '<a href="login.php">Sign In</a>';
+                }
+                ?>
+            </span>
         </div>
     </div>
-    <div class="divider-2"></div>
 </div>
