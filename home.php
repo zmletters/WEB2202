@@ -16,6 +16,7 @@ session_start()
 <body>
     <div class="home-page">
         <div class="div">
+
             <div class="nav">
                 <div class="nav-content">
                     <div class="navbar">
@@ -155,9 +156,3 @@ session_start()
 </body>
 
 </html>
-
-
-<?php
-session_start()
-
-?>
