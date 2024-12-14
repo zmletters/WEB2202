@@ -1,0 +1,696 @@
+.home-page {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+
+.home-page .div {
+    background-color: #ffffff;
+    width: 1280px;
+    height: 2296px;
+    position: relative;
+}
+
+.home-page .nav {
+    display: flex;
+    flex-direction: column;
+    width: 1280px;
+    align-items: flex-start;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #8faf86;
+}
+
+.home-page .nav-content {
+    display: flex;
+    height: 92px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 160px;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+}
+
+.home-page .navbar {
+    display: inline-flex;
+    align-items: center;
+    gap: 32px;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.home-page .button {
+    all: unset;
+    box-sizing: border-box;
+    width: 138px;
+    height: 52px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 16px 24px;
+    border-radius: 90px;
+}
+
+.home-page .label {
+    margin-left: -42.50px;
+    margin-right: -42.50px;
+    color: #ffffff;
+    font-size: 36px;
+    position: relative;
+    width: fit-content;
+    font-family: "DM Sans-Bold", Helvetica;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 16px;
+    white-space: nowrap;
+}
+
+.home-page .divider {
+    width: 2px;
+    height: 40px;
+    border-radius: 2px;
+    position: relative;
+    background-color: #e5e8eb;
+}
+
+.home-page .text-wrapper {
+    position: relative;
+    width: fit-content;
+    font-family: "DM Sans-Bold", Helvetica;
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 16px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: 16px;
+    white-space: nowrap;
+}
+
+.home-page .frame {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 32px;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.home-page .frame-2 {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.home-page .group {
+    position: relative;
+    width: 38px;
+    height: 38px;
+}
+
+.home-page .overlap-group {
+    position: relative;
+    height: 38px;
+}
+
+.home-page .button-icon-only {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    position: absolute;
+    top: 2px;
+    left: 0;
+    border-radius: 3px;
+}
+
+.home-page .shopping-cart {
+    position: relative;
+    width: 20px;
+    height: 20px;
+}
+
+.home-page .badge-primary {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 2px 6px;
+    position: absolute;
+    top: 0;
+    left: 18px;
+    background-color: #18191d;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid;
+    border-color: #ffffff;
+}
+
+.home-page .text-wrapper-2 {
+    position: relative;
+    width: fit-content;
+    margin-top: -1.00px;
+    font-family: "Inter-SemiBold", Helvetica;
+    font-weight: 600;
+    color: #ffffff;
+    font-size: 12px;
+    letter-spacing: 0;
+    line-height: 16px;
+    white-space: nowrap;
+}
+
+.home-page .icons-bell-line {
+    position: relative;
+    width: 32px;
+    height: 24px;
+}
+
+.home-page .frame-wrapper {
+    position: relative;
+    width: 44px;
+    height: 44px;
+}
+
+.home-page .frame-3 {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+    position: relative;
+}
+
+.home-page .img {
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.home-page .divider-2 {
+    align-self: stretch;
+    width: 100%;
+    height: 1px;
+    position: relative;
+    background-color: #e5e8eb;
+}
+
+.home-page .overlap {
+    position: absolute;
+    width: 1280px;
+    height: 514px;
+    top: 93px;
+    left: 0;
+    background-color: #f4f5f6;
+    background-image: url(./img/14a8c576-7bcc-458b-b969-cf2a8e4069c2-1.png);
+    background-size: cover;
+    background-position: 50% 50%;
+}
+
+.home-page .label-wrapper {
+    all: unset;
+    box-sizing: border-box;
+    width: 192px;
+    position: absolute;
+    top: 209px;
+    left: 544px;
+    background-color: #71a365;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 16px 24px;
+    border-radius: 90px;
+}
+
+.home-page .label-2 {
+    margin-top: -1.00px;
+    color: #fbfcfc;
+    font-size: 20px;
+    text-align: center;
+    position: relative;
+    width: fit-content;
+    font-family: "DM Sans-Bold", Helvetica;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 16px;
+    white-space: nowrap;
+}
+
+.home-page .div-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 832px;
+    height: 76px;
+    align-items: flex-start;
+    gap: 52px;
+    position: absolute;
+    top: 82px;
+    left: 231px;
+    border-radius: 20px;
+}
+
+.home-page .frame-4 {
+    display: inline-flex;
+    flex-direction: column;
+    height: 87px;
+    align-items: flex-start;
+    gap: 32px;
+    position: relative;
+    margin-bottom: -11.00px;
+    margin-right: -78.00px;
+}
+
+.home-page .p {
+    position: relative;
+    width: 910px;
+    height: 213px;
+    margin-top: -1.00px;
+    margin-bottom: -125.00px;
+    font-family: "DM Sans-Bold", Helvetica;
+    font-weight: 700;
+    color: #131416;
+    font-size: 48px;
+    letter-spacing: -0.96px;
+    line-height: 96px;
+}
+
+.home-page .overlap-2 {
+    position: absolute;
+    width: 1242px;
+    height: 300px;
+    top: 644px;
+    left: 20px;
+}
+
+.home-page .promotion-tab {
+    position: absolute;
+    width: 1242px;
+    height: 300px;
+    top: 0;
+    left: 0;
+}
+
+.home-page .overlap-3 {
+    position: relative;
+    width: 1240px;
+    height: 300px;
+    background-image: url(./img/mask-group.png);
+    background-size: 100% 100%;
+}
+
+.home-page .text-wrapper-3 {
+    position: absolute;
+    width: 616px;
+    top: 121px;
+    left: 312px;
+    font-family: "DM Sans-9ptItalic", Helvetica;
+    font-weight: 400;
+    font-style: italic;
+    color: #0d4922;
+    font-size: 69.4px;
+    letter-spacing: 0;
+    line-height: 64.5px;
+    white-space: nowrap;
+}
+
+.home-page .scroll-tab {
+    position: absolute;
+    width: 77px;
+    height: 18px;
+    top: 265px;
+    left: 1130px;
+}
+
+.home-page .ellipse {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    top: 3px;
+    left: 65px;
+    background-color: #ffffff;
+    border-radius: 6px;
+}
+
+.home-page .ellipse-2 {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    top: 3px;
+    left: 45px;
+    background-color: #ffffff;
+    border-radius: 6px;
+}
+
+.home-page .ellipse-3 {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    top: 3px;
+    left: 25px;
+    background-color: #ffffff;
+    border-radius: 6px;
+}
+
+.home-page .ellipse-4 {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    top: 0;
+    left: 0;
+    background-color: #65bf84;
+    border-radius: 9px;
+}
+
+.home-page .vector {
+    position: absolute;
+    width: 28px;
+    height: 48px;
+    top: 118px;
+    left: 1182px;
+}
+
+.home-page .button-2 {
+    all: unset;
+    box-sizing: border-box;
+    width: 192px;
+    position: absolute;
+    top: 217px;
+    left: 524px;
+    background-color: #71a365;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 16px 24px;
+    border-radius: 90px;
+}
+
+.home-page .overlap-wrapper {
+    position: absolute;
+    width: 1279px;
+    height: 413px;
+    top: 1883px;
+    left: 0;
+    background-color: #332424;
+}
+
+.home-page .overlap-4 {
+    position: relative;
+    width: 1281px;
+    height: 413px;
+}
+
+.home-page .overlap-group-wrapper {
+    position: absolute;
+    width: 1281px;
+    height: 413px;
+    top: 0;
+    left: 0;
+}
+
+.home-page .overlap-group-2 {
+    position: relative;
+    width: 1279px;
+    height: 413px;
+    background-color: #8eaf86;
+}
+
+.home-page .containers {
+    position: absolute;
+    width: 104px;
+    top: 55px;
+    left: 79px;
+    font-family: "Rubik-Medium", Helvetica;
+    font-weight: 500;
+    color: #131416;
+    font-size: 24px;
+    letter-spacing: 0;
+    line-height: 28px;
+}
+
+.home-page .group-2 {
+    position: absolute;
+    width: 275px;
+    height: 190px;
+    top: 115px;
+    left: 79px;
+}
+
+.home-page .social-network {
+    position: absolute;
+    width: 20px;
+    height: 21px;
+    top: 169px;
+    left: 21px;
+    background-image: url(./img/facebook.svg);
+    background-size: 100% 100%;
+}
+
+.home-page .follow-us {
+    position: absolute;
+    width: 166px;
+    top: 0;
+    left: 0;
+    font-family: "Poppins-SemiBold", Helvetica;
+    font-weight: 600;
+    color: #3b5266;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 24px;
+}
+
+.home-page .frame-5 {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    position: absolute;
+    top: 36px;
+    left: 0;
+}
+
+.home-page .hello-forpeople-stud {
+    position: relative;
+    width: 263px;
+    margin-top: -1.00px;
+    font-family: "Lato-Regular", Helvetica;
+    font-weight: 400;
+    color: #353945;
+    font-size: 17px;
+    letter-spacing: 0;
+    line-height: 25px;
+}
+
+.home-page .text-wrapper-4 {
+    position: relative;
+    width: 263px;
+    font-family: "Lato-Regular", Helvetica;
+    font-weight: 400;
+    color: #353945;
+    font-size: 17px;
+    letter-spacing: 0;
+    line-height: 25px;
+}
+
+.home-page .footer {
+    position: absolute;
+    width: 1279px;
+    height: 64px;
+    top: 349px;
+    left: 0;
+    background-color: transparent;
+}
+
+.home-page .copyright-al {
+    position: absolute;
+    width: 284px;
+    top: 20px;
+    left: 852px;
+    font-family: "Rubik-Regular", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 14px;
+    text-align: right;
+    letter-spacing: 0;
+    line-height: 22px;
+}
+
+.home-page .instagram {
+    position: absolute;
+    width: 18px;
+    height: 21px;
+    top: 284px;
+    left: 174px;
+}
+
+.home-page .twitter {
+    position: absolute;
+    width: 18px;
+    height: 21px;
+    top: 284px;
+    left: 139px;
+}
+
+.home-page .ant-design-picture {
+    position: absolute;
+    width: 418px;
+    height: 381px;
+    top: 16px;
+    left: 785px;
+}
+
+.home-page .images {
+    position: absolute;
+    width: 378px;
+    height: 183px;
+    top: 99px;
+    left: 20px;
+    object-fit: cover;
+}
+
+.home-page .frame-6 {
+    position: absolute;
+    width: 1279px;
+    height: 363px;
+    top: 1520px;
+    left: 0;
+    background-color: #71a36526;
+}
+
+.home-page .frame-7 {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    position: absolute;
+    top: 48px;
+    left: 505px;
+}
+
+.home-page .text-wrapper-5 {
+    position: relative;
+    width: fit-content;
+    margin-top: -1.00px;
+    font-family: var(--body-1-font-family);
+    font-weight: var(--body-1-font-weight);
+    color: #000000;
+    font-size: var(--body-1-font-size);
+    text-align: center;
+    letter-spacing: var(--body-1-letter-spacing);
+    line-height: var(--body-1-line-height);
+    white-space: nowrap;
+    font-style: var(--body-1-font-style);
+}
+
+.home-page .text-wrapper-6 {
+    position: relative;
+    width: fit-content;
+    font-family: var(--headline-4-font-family);
+    font-weight: var(--headline-4-font-weight);
+    color: #000000;
+    font-size: var(--headline-4-font-size);
+    text-align: center;
+    letter-spacing: var(--headline-4-letter-spacing);
+    line-height: var(--headline-4-line-height);
+    white-space: nowrap;
+    font-style: var(--headline-4-font-style);
+}
+
+.home-page .frame-8 {
+    position: absolute;
+    width: 858px;
+    height: 106px;
+    top: 182px;
+    left: 211px;
+}
+
+.home-page .sunwayxfarms-logo-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 289px;
+    height: 106px;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.home-page .sunwayxfarms-logo {
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    height: 106px;
+    object-fit: cover;
+}
+
+.home-page .untitled {
+    width: 149px;
+    height: 106px;
+    top: 0;
+    left: 333px;
+    position: absolute;
+    object-fit: cover;
+}
+
+.home-page .untitled-2 {
+    width: 332px;
+    height: 86px;
+    top: 10px;
+    left: 526px;
+    position: absolute;
+    object-fit: cover;
+}
+
+.home-page .picture-big {
+    position: absolute;
+    width: 1261px;
+    height: 375px;
+    top: 1097px;
+    left: 9px;
+    background-color: #f6f7fa;
+    border-radius: 20px;
+    overflow: hidden;
+    background-image: url(./img/64e8d137-7377-4606-bb5b-9a37b13c8dc0-1.png);
+    background-size: cover;
+    background-position: 50% 50%;
+}
+
+.home-page .icon-play {
+    position: relative;
+    width: 96px;
+    height: 96px;
+    top: 148px;
+    left: 583px;
+}
+
+.home-page .mask-wrapper {
+    position: relative;
+    height: 96px;
+}
+
+.home-page .mask {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    top: 8px;
+    left: 8px;
+}
+
+.home-page .frame-9 {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    position: absolute;
+    top: 995px;
+    left: 505px;
+}
