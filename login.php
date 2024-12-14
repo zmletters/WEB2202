@@ -105,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['first_name'] = $data["first_name"];
 
         // Redirect:
-        redirect_user('loggedin.php');
+        redirect_user('home.php');
     } else { // Unsuccessful!
 
         // Assign $data to $errors for login_page.inc.php:

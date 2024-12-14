@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 // Database connection
 require('mysqli_connect.php');

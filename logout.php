@@ -1,16 +1,16 @@
 <?php
 session_start();					 // Access the existing session.
+require('inc/functions.inc.php');
 
 // If no session variable exists, redirect the user:
 if (!isset($_SESSION['user_id'])) {
 
-	// Need the functions:
-	require('login_functions.inc.php');
-	redirect_user('');
+	redirect_user('login.php');
 } else { // Cancel the session:
 
 	$_SESSION = array();
 	session_destroy();
+	redirect_user('home.php');
 }
 
 // Set the page title and include the HTML header:

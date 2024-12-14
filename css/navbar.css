@@ -85,3 +85,22 @@
 .user-action a:hover {
     color: #E5E8EB;
 }
+
+/* Logout Icon */
+.logout-icon {
+    width: 24px;
+    height: 24px;
+    margin-left: 10px;
+    vertical-align: middle;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.logout-icon .img {
+    width: 24px;
+    height: 24px;
+}
+
+.logout-icon:hover {
+    opacity: 0.8;
+}
