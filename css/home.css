@@ -280,14 +280,39 @@ body {
     color: #131416;
 }
 
-.supplier-section .supplier-logos {
+.supplier-logos {
     display: flex;
     justify-content: center;
     gap: 40px;
+    /* Spacing between the logos */
     margin-top: 20px;
+    flex-wrap: wrap;
+    /* Ensures wrapping on smaller screens */
 }
 
-.supplier-section .supplier-logos img {
-    max-width: 150px;
-    height: auto;
+.supplier-logo {
+    width: 150px;
+    /* Fixed width for each logo container */
+    height: 100px;
+    /* Fixed height for each logo container */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    /* Optional: Add a background for logos */
+    border-radius: 10px;
+    /* Optional: Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Optional: Add a subtle shadow */
+    overflow: hidden;
+    /* Ensure no image overflows */
+}
+
+.supplier-logo img {
+    max-width: 100%;
+    /* Ensure the image scales within the container */
+    max-height: 100%;
+    /* Ensure the image scales within the container */
+    object-fit: contain;
+    /* Maintain aspect ratio and fit inside the container */
 }

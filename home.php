@@ -69,14 +69,21 @@ require('mysqli_connect.php');
 
         <!-- Supplier Section -->
         <div class="supplier-section">
-            <h2>Our Supplier</h2>
+            <h2>Our Suppliers</h2>
             <h3>Sustainable Farms</h3>
             <div class="supplier-logos">
-                <img src="img/sunway xfarm logo.jpg" alt="Sunway Farms Logo">
-                <img src="img/urban_hijau_logo.jpeg" alt="Urban Hijau Logo">
-                <img src="img/cultiveat logo.webp" alt="Cultiveat Logo">
+                <div class="supplier-logo">
+                    <img src="img/SunwayXFarmLogo.png" alt="Sunway Farms Logo">
+                </div>
+                <div class="supplier-logo">
+                    <img src="img/urban_hijau_logo.jpeg" alt="Urban Hijau Logo">
+                </div>
+                <div class="supplier-logo">
+                    <img src="img/cultiveat logo.webp" alt="Cultiveat Logo">
+                </div>
             </div>
         </div>
+
     </div>
 
     <!-- Footer -->
