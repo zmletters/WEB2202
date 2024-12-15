@@ -5,6 +5,32 @@ session_start();
 require('mysqli_connect.php');
 
 
+// Handle Add to Cart functionality
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['product_id'])) {
+    $user_id = $_SESSION['user_id'] ?? null; // Ensure the user is logged in
+    $product_id = intval($_POST['product_id']);
+    $quantity = 1; // Adding 1 quantity by default
+
+    if ($user_id && $product_id > 0) {
+        // Insert or update the cart
+        $query = "INSERT INTO cart (user_id, product_id, quantity) 
+                  VALUES (?, ?, ?) 
+                  ON DUPLICATE KEY UPDATE quantity = quantity + ?";
+        $stmt = $dbc->prepare($query);
+        $stmt->bind_param('iiii', $user_id, $product_id, $quantity, $quantity);
+
+        if ($stmt->execute()) {
+            // Successfully added to cart, refresh the page
+            header('Location: products.php');
+            exit();
+        } else {
+            echo '<p>Error: Could not add to cart. Please try again later.</p>';
+        }
+    } else {
+        echo '<p>Error: You must be logged in to add to the cart.</p>';
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -14,7 +40,7 @@ require('mysqli_connect.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Products</title>
-    <link rel="stylesheet" href="css/productstyle.css">
+    <link rel="stylesheet" href="css/products.css">
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/footer.css">
 </head>
@@ -57,9 +83,10 @@ require('mysqli_connect.php');
                             <h3>' . htmlspecialchars($row['name']) . '</h3>
                             <p class="price">RM' . number_format($row['price'], 2) . '/' . htmlspecialchars($row['unit']) . ' </p>
 
-                            <button class="add-to-cart">
-                                <img src="img/shopping-cart-outline.svg" alt="Cart Icon"> Add to Cart
-                            </button>
+                            <form action="products.php" method="POST">
+                                <input type="hidden" name="product_id" value="' . $row['product_id'] . '">
+                                <button type="submit" class="add-to-cart">Add to Cart</button>
+                            </form>
                         </div>
                     </div>';
                 }
@@ -77,3 +104,6 @@ require('mysqli_connect.php');
 <?php include('inc/footer.inc.php'); ?>
 
 </html>
+
+
+<!-- <img src="img/shopping-cart-outline.svg" alt="Cart Icon"> -->

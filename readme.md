@@ -26,3 +26,7 @@ admin
 
 
 beautify
+
+
+http://localhost/web2202/cart.php
+http://localhost/phpmyadmin/index.php

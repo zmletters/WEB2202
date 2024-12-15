@@ -100,7 +100,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
                         <!-- Add to Cart Button -->
                         <button type="submit" class="add-to-cart">
-                            <img src="img/cart.svg" alt="Cart Icon"> Add to Cart
+                            <img src="img/shopping-cart-outline.svg" alt="Cart Icon"> Add to Cart
                         </button>
                     </form>
                 </div>

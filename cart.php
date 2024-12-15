@@ -83,16 +83,17 @@ if (isset($_SESSION['user_id'])) {
                                 <td>$<?php echo number_format($item['price'], 2); ?></td>
                                 <td>
                                     <div class="quantity-control">
-                                        <button>-</button>
-                                        <input type="text" value="<?php echo $item['quantity']; ?>">
-                                        <button>+</button>
+                                        <!-- <button>-</button> -->
+                                        <span><?php echo $item['quantity']; ?></span>
+                                        <!-- <input type="text" value="<?php echo $item['quantity']; ?>"> -->
+                                        <!-- <button>+</button> -->
                                     </div>
                                 </td>
                                 <td>$<?php echo number_format($item['price'] * $item['quantity'], 2); ?></td>
                                 <td>
                                     <form action="remove_from_cart.php" method="POST" style="display: inline;">
                                         <input type="hidden" name="cart_id" value="<?php echo $item['cart_id']; ?>">
-                                        <button type="submit" class="remove-btn">X</button>
+                                        <button type="submit" class="remove-btn">X Remove</button>
                                     </form>
                                 </td>
                             </tr>
