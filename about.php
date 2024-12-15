@@ -26,7 +26,7 @@ require('mysqli_connect.php');
 
         <!-- Our Story Section -->
         <div class="our-story">
-            <img src="img/vector.svg" alt="Illustration of discussion">
+            <img src="img/our story1.png" alt="Illustration of discussion">
             <div class="content">
                 <h2>Our Story</h2>
                 <p>
@@ -54,7 +54,7 @@ require('mysqli_connect.php');
                     <li>Supporting communities in need by allocating a portion of our revenue to food aid programs and donations for families facing food insecurity.</li>
                 </ul>
             </div>
-            <img src="img/image.png" alt="Sustainable farming">
+            <img src="img/our story2.png" alt="Sustainable farming">
         </div>
     </div>
 </body>
