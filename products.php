@@ -29,6 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['product_id'])) {
         }
     } else {
         echo '<p>Error: You must be logged in to add to the cart.</p>';
+        header('Location: login.php');
     }
 }
 

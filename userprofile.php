@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_profile'])) {
             if ($result->num_rows == 1) {
                 $user_data = $result->fetch_assoc(); // Refresh the $user_data variable with updated data
             }
-
+            $_SESSION['first_name'] = $first_name;
             header('Location: profile_update_success.php');
             exit();
         } else {

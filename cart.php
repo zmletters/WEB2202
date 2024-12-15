@@ -78,7 +78,7 @@ if (isset($_SESSION['user_id'])) {
                                         <span><?php echo htmlspecialchars($item['product_name']); ?></span>
                                     </div>
                                 </td>
-                                <td>$<?php echo number_format($item['price'], 2); ?></td>
+                                <td>RM <?php echo number_format($item['price'], 2); ?></td>
                                 <td>
                                     <div class="quantity-control">
                                         <!-- Quantity Update Form -->
@@ -90,7 +90,7 @@ if (isset($_SESSION['user_id'])) {
                                         </form>
                                     </div>
                                 </td>
-                                <td>$<?php echo number_format($item['price'] * $item['quantity'], 2); ?></td>
+                                <td>RM <?php echo number_format($item['price'] * $item['quantity'], 2); ?></td>
                                 <td>
                                     <form action="remove_from_cart.php" method="POST" style="display: inline;">
                                         <input type="hidden" name="cart_id" value="<?php echo $item['cart_id']; ?>">
@@ -104,7 +104,7 @@ if (isset($_SESSION['user_id'])) {
                 <div class="cart-footer">
                     <a href="products.php" class="back-to-shopping">&larr; Back to shopping</a>
                     <div class="total-price">
-                        Total Price: <span>$<?php echo number_format(array_sum(array_map(fn($item) => $item['price'] * $item['quantity'], $cartItems)), 2); ?></span>
+                        Total Price: <span>RM <?php echo number_format(array_sum(array_map(fn($item) => $item['price'] * $item['quantity'], $cartItems)), 2); ?></span>
                     </div>
                     <a href="checkout.php" class="checkout-btn">Check Out</a>
                 </div>

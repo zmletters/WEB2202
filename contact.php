@@ -2,7 +2,6 @@
 include('inc/session.inc.php');
 require('mysqli_connect.php');
 
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Validate and sanitize input
     $name = htmlspecialchars(trim($_POST['name']));
@@ -26,7 +25,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->close();
     $dbc->close();
 }
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -44,9 +42,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <main>
         <div class="contact-us">
             <div class="contacts-container">
+                <!-- Contact Form Section -->
                 <div class="form-container">
                     <h2>Contact Us</h2>
-                    <form action="contact_success.php" method="POST">
+                    <form action="contact.php" method="POST">
                         <div class="form-group">
                             <input type="text" name="name" placeholder="Your Name" required />
                         </div>
@@ -59,16 +58,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <button type="submit" class="btn-submit">Send</button>
                     </form>
                 </div>
+
+                <!-- Map and Contact Details Section -->
                 <div class="form-container">
                     <img src="img/map.png" alt="Map" />
+                    <div class="contact-details">
+                        <h3>Contact Information</h3>
+                        <p><strong>Email:</strong> admin@freshara.com</p>
+                        <p><strong>Phone:</strong> +601-2345-6789</p>
+                        <p><strong>Address:</strong> 52, Bandar Sunway, PJ, Malaysia</p>
+                    </div>
                 </div>
             </div>
-
-
         </div>
     </main>
     <?php include('inc/footer.inc.php'); ?>
 </body>
-
 
 </html>

@@ -44,9 +44,7 @@
                 <div class="LABEL-wrapper">
                     <p>Don’t have an account? <a href="signup.php" class="text-wrapper-3">Sign Up</a></p>
                 </div>
-                <div class="LABEL-wrapper">
-                    <a href="admin-login.php" class="LABEL-2">Admin Login</a>
-                </div>
+
             </div>
         </div>
     </div>

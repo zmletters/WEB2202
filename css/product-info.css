@@ -124,6 +124,10 @@ body {
     gap: 15px;
 }
 
+.product-actions form {
+    display: flex;
+}
+
 .product-actions button {
     padding: 10px 20px;
     border-radius: 5px;

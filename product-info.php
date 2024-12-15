@@ -84,11 +84,11 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                 <p class="product-description"><?= htmlspecialchars($product['description']); ?></p>
 
                 <!-- Rating Section -->
-                <div class="product-rating">
+                <!-- <div class="product-rating">
                     <span class="rating-value">4.8</span>
                     <span class="rating-count">(1,873 reviews)</span>
                     <img src="img/star.svg" alt="Rating Icon">
-                </div>
+                </div> -->
 
                 <!-- Add to Cart Form -->
                 <div class="product-actions">

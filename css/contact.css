@@ -162,3 +162,25 @@ h2 {
     outline: none;
     background-color: #519e4a;
 }
+
+.contact-details {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #555;
+}
+
+.contact-details h3 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.contact-details p {
+    margin: 5px 0;
+    line-height: 1.5;
+}
+
+.contact-details strong {
+    color: #131416;
+    /* Freshara green accent */
+}
