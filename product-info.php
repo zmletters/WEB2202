@@ -1,8 +1,38 @@
 <?php
 session_start();
 require('mysqli_connect.php');
+require('inc/functions.inc.php');
 
-// Fetch product details
+// Handle Add to Cart Logic
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    check_user_logged_in();
+
+    $user_id = $_SESSION['user_id']; // Ensure the user is logged in
+    $product_id = intval($_POST['product_id']);
+    $quantity = intval($_POST['quantity']);
+
+    // Validate input
+    if ($user_id && $product_id && $quantity > 0) {
+        // Insert or update the cart
+        $query = "INSERT INTO cart (user_id, product_id, quantity) 
+                  VALUES (?, ?, ?) 
+                  ON DUPLICATE KEY UPDATE quantity = quantity + ?";
+        $stmt = $dbc->prepare($query);
+        $stmt->bind_param('iiii', $user_id, $product_id, $quantity, $quantity);
+
+        if ($stmt->execute()) {
+            // Optionally redirect to cart or show a success message
+            header('Location: cart.php'); // Redirect to cart page
+            exit();
+        } else {
+            $error_message = 'Could not add to cart. Please try again later.';
+        }
+    } else {
+        $error_message = 'Invalid product or quantity.';
+    }
+}
+
+// Fetch Product Details
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $product_id = intval($_GET['id']);
     $stmt = $dbc->prepare("SELECT * FROM products WHERE product_id = ?");
@@ -19,7 +49,6 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     die("Invalid product ID.");
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,7 +59,6 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     <link rel="stylesheet" href="css/product-info.css">
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/footer.css">
-
 </head>
 
 <body>
@@ -47,7 +75,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
             <!-- Product Details -->
             <div class="product-details">
                 <h1 class="product-title"><?= htmlspecialchars($product['name']); ?></h1>
-                <p class="product-price">$<?= number_format($product['price'], 2); ?>/100g</p>
+                <p class="product-price">RM <?= number_format($product['price'], 2); ?>/<?= htmlspecialchars($product['unit']); ?></p>
                 <p class="product-description"><?= htmlspecialchars($product['description']); ?></p>
 
                 <!-- Rating Section -->
@@ -57,52 +85,58 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                     <img src="img/star.svg" alt="Rating Icon">
                 </div>
 
-                <!-- Quantity Selector -->
-                <div class="quantity-section">
-                    <button class="decrement">-</button>
-                    <span class="quantity">1</span>
-                    <button class="increment">+</button>
-                </div>
-
-                <!-- Action Buttons -->
+                <!-- Add to Cart Form -->
                 <div class="product-actions">
-                    <button class="order-now">Order Now</button>
-                    <button class="add-to-cart">
-                        <img src="img/cart.svg" alt="Cart Icon"> Add to Cart
-                    </button>
+                    <form method="POST">
+                        <input type="hidden" name="product_id" value="<?= htmlspecialchars($product['product_id']); ?>">
+                        <input type="hidden" id="hidden-quantity" name="quantity" value="1"> <!-- Hidden input -->
+
+                        <!-- Quantity Selector -->
+                        <div class="quantity-section">
+                            <button type="button" class="decrement">-</button>
+                            <span id="quantity" class="quantity">1</span>
+                            <button type="button" class="increment">+</button>
+                        </div>
+
+                        <!-- Add to Cart Button -->
+                        <button type="submit" class="add-to-cart">
+                            <img src="img/cart.svg" alt="Cart Icon"> Add to Cart
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
-
-        <!-- Tabs Section -->
-        <div class="tabs">
-            <button class="tab active">Description</button>
-            <button class="tab">Reviews</button>
-        </div>
-
-        <!-- Reviews Section -->
-        <section class="reviews">
-            <h2>Add a Review</h2>
-            <textarea placeholder="Share your thoughts..."></textarea>
-            <button class="submit-review">Post It</button>
-
-            <div class="comments">
-                <h3>Comments (3)</h3>
-                <div class="comment">
-                    <p><strong>Darren Leong</strong> - Tasty!</p>
-                    <p>about 1 hour ago</p>
-                </div>
-                <div class="comment">
-                    <p><strong>Charles Wang</strong> - Good for health!</p>
-                    <p>about 1 hour ago</p>
-                </div>
-            </div>
-        </section>
     </div>
+
     <!-- Footer -->
     <?php include('inc/footer.inc.php'); ?>
 
-</body>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const decrementButton = document.querySelector(".decrement");
+            const incrementButton = document.querySelector(".increment");
+            const quantitySpan = document.getElementById("quantity");
+            const hiddenQuantityInput = document.getElementById("hidden-quantity");
 
+            // Decrement quantity
+            decrementButton.addEventListener("click", function() {
+                let currentValue = parseInt(quantitySpan.textContent, 10);
+                if (currentValue > 1) {
+                    currentValue--;
+                    quantitySpan.textContent = currentValue;
+                    hiddenQuantityInput.value = currentValue; // Update hidden input
+                }
+            });
+
+            // Increment quantity
+            incrementButton.addEventListener("click", function() {
+                let currentValue = parseInt(quantitySpan.textContent, 10);
+                currentValue++;
+                quantitySpan.textContent = currentValue;
+                hiddenQuantityInput.value = currentValue; // Update hidden input
+            });
+        });
+    </script>
+</body>
 
 </html>

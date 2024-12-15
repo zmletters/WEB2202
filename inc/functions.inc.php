@@ -17,3 +17,12 @@ function redirect_user($page)
     exit(); // Quit the script.
 
 } // End of redirect_user() function.
+
+
+function check_user_logged_in()
+{
+    if (!isset($_SESSION['user_id'])) {
+        redirect_user('login.php');
+        exit();
+    }
+}
