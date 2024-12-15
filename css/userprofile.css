@@ -37,7 +37,7 @@ h1 {
     width: 25%;
     background-color: #f6f7fa;
     padding: 20px;
-    border-right: 1px solid #ddd;
+    border: 1px solid #ddd;
 }
 
 .profile-sidebar ul {

@@ -1,6 +1,8 @@
 <div class="navbar">
     <div class="navbar-logo">
-        <span class="navbar-title">FRESHARA</span>
+        <a href="home.php" class="navbar-link">
+            <span class="navbar-title">FRESHARA</span>
+        </a>
     </div>
     <div class="navbar-links">
         <a href="home.php" class="navbar-link">Home</a>

@@ -4,7 +4,7 @@
     align-items: center;
     justify-content: space-between;
     background-color: #8FAF86;
-    padding: 0 20px;
+    padding: 0 90px;
     height: 80px;
     color: #FFFFFF;
 }
@@ -12,14 +12,15 @@
 /* Logo */
 .navbar-logo .navbar-title {
     font-family: 'DM Sans', sans-serif;
-    font-size: 24px;
+    font-size: 32px;
     font-weight: bold;
 }
+
 
 /* Links */
 .navbar-links {
     display: flex;
-    gap: 20px;
+    gap: 24px;
 }
 
 .navbar-link {

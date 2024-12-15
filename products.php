@@ -25,13 +25,13 @@ require('mysqli_connect.php');
     <div class="products">
 
 
-        <!-- Search and Deals Section -->
+        <!-- Search and Deals Section
         <div class="search-deals">
             <div class="search-bar">
                 <input type="text" placeholder="Search for anything...">
                 <button class="search-btn"><img src="img/icon-59.svg" alt="Search"></button>
             </div>
-        </div>
+        </div> -->
 
         <!-- Product Listing -->
         <h2>All Products</h2>

@@ -1,42 +1,166 @@
-.signup {
+/* Reset Styles (Meyer Reset) */
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+
+* {
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
     height: 100%;
+    font-family: 'Inter', Helvetica, Arial, sans-serif;
+}
+
+button:focus-visible {
+    outline: 2px solid #4a90e2;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.sign-up {
+    display: flex;
+    height: 100%;
+    align-items: flex-start;
+    justify-content: space-between;
     width: 100%;
+    background-color: #fff;
     min-width: 1280px;
-    display: flex;
-    position: relative;
 }
 
-.signup .leftcol {
-    width: 65%;
+/* Left Section (Aside) */
+.sign-up .aside {
+    flex: 1;
+    position: relative;
     height: 100%;
+}
+
+.sign-up .aside img.background-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.sign-up .aside .aside-content {
     position: relative;
+    z-index: 2;
+    padding: 5%;
+    color: #fff;
+}
+
+.sign-up .text-wrapper {
+    margin-top: 5%;
+    font-weight: bold;
+    font-size: 40px;
+    line-height: 48px;
+}
+
+.sign-up .tagline {
+    font-size: 18px;
+    line-height: 30px;
+}
+
+/* Right Section (Container) */
+.sign-up .container {
     display: flex;
-    flex: 1;
     flex-direction: column;
-    background-image: url(/img/signin.jpg);
-    background-size: cover;
-    /* background-position: 50% 50%; */
-}
-
-.signup .tagline {
-    width: fit-content;
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: 500;
-    font-size: 30;
-}
-
-.signup .rightcol {
     width: 35%;
-    height: inherit;
-    position: relative;
-    display: flex;
-    flex: 1;
-    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-.signup .signup-form {
+.sign-up .form-signup-default {
+    width: 424px;
+}
+
+.sign-up .heading {
+    font-weight: 600;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+/* Form Elements */
+.sign-up .form {
     display: flex;
-    position: relative;
-    flex: 1;
     flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.sign-up .x-form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.sign-up .form-title {
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #425466;
+}
+
+.sign-up .input {
+    width: 100%;
+    height: 46px;
+    background-color: #edf2f7;
+    border-radius: 6px;
+    border: 1px solid #cbd5e0;
+    padding: 0 12px;
+    font-size: 15px;
+    color: #425466;
+}
+
+.sign-up .input:focus {
+    border-color: #4a90e2;
+    outline: none;
+}
+
+/* Submit Button */
+.sign-up .button {
+    all: unset;
+    box-sizing: border-box;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 16px;
+    background-color: #71a365;
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+    border-radius: 90px;
+    cursor: pointer;
+    border: none;
+}
+
+.sign-up .button:hover {
+    background-color: #609953;
+}
+
+/* Labels and Links */
+.sign-up .LABEL-wrapper {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.sign-up .LABEL-wrapper .text-wrapper-3 {
+    color: #131416;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.sign-up .LABEL-wrapper .text-wrapper-3:hover {
+    color: #4a90e2;
 }

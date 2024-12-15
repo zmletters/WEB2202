@@ -1,7 +1,7 @@
 <footer>
     <div class="footer-content">
         <div class="brand-info">
-            <h3>Freshara</h3>
+            <h3>FRESHARA</h3>
             <p><strong>Contact us</strong></p>
             <p>admin@freshara.com</p>
             <p>+601-2345-6789</p>

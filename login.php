@@ -1,90 +1,62 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | Freshara</title>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="css/loginglobals.css" />
-    <link rel="stylesheet" href="css/loginstyleguide.css" />
-    <link rel="stylesheet" href="css/loginstyle.css" />
+    <link rel="stylesheet" href="css/loginstyle.css">
 </head>
 
 <body>
     <div class="sign-in">
+        <!-- Left Section with Welcome Message and Background Image -->
         <div class="aside">
-            <div class="text-wrapper">Welcome to Freshara!</div>
-            <p class="tagline">Where Sustainability Meets Zero Hunger.</p>
+            <img src="img/signin.jpg" alt="Background Image" class="background-img">
+            <div class="aside-content">
+                <h1 class="text-wrapper">Welcome to Freshara!</h1>
+                <p class="tagline">Where Sustainability Meets Zero Hunger.</p>
+            </div>
         </div>
-        <div class="container">
-            <div class="main">
-                <div class="form-login-default">
-                    <div class="heading">Welcome back!</div>
-                    <form class="form" method='post'>
-                        <div class="x-form-group">
-                            <div class="input-large">
-                                <div class="form-title-default">
-                                    <label class="form-title" for="input-2">Email</label>
-                                </div>
-                                <div class="input">
-                                    <div class="control-wrapper">
-                                        <div class="control">
-                                            <input name="email" class="text" placeholder="Type your email" type="text"
-                                                id="input-2" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="x-form-group">
-                            <div class="input-large">
-                                <div class="form-title-default">
-                                    <div class="form-title">Password</div>
-                                </div>
-                                <div class="input">
-                                    <div class="control-wrapper">
-                                        <div class="control">
-                                            <input name="pass" class="text" placeholder="Type your password" type="text"
-                                                id="input-2" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-help-text">
-                                    <div class="form-help-text-2">Forgot
-                                        Password?</div>
-                                </div>
-                            </div>
-                        </div>
-                        <button name='submit' value='Login' class="button">
-                            <div class="label">Sign
-                                In</div>
-                        </button>
-                </div>
 
-            </div>
-            <div class="LABEL-wrapper">
-                <p class="LABEL">
-                    <span class="span">Don’t have an account?</span>
-                </p>
-            </div>
-            <div class="LABEL-wrapper"><span class="text-wrapper-3">Sign
-                    Up</span></div>
-            <div class="LABEL-wrapper">
-                <div class="LABEL-2">Admin
-                    Login</div>
+        <!-- Right Section with Login Form -->
+        <div class="container">
+            <div class="form-login-default">
+                <h2 class="heading">Welcome back!</h2>
+                <form class="form" method='post'>
+                    <!-- Email Input -->
+                    <div class="x-form-group">
+                        <label for="email" class="form-title">E-mail</label>
+                        <input name="email" type="email" class="input" placeholder="Type your e-mail" required>
+                    </div>
+
+                    <!-- Password Input -->
+                    <div class="x-form-group">
+                        <label for="password" class="form-title">Password</label>
+                        <input name="pass" type="password" class="input" placeholder="Type your password" required>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" name="submit" value="Login" class="button">Sign In</button>
+                </form>
+
+                <!-- Links for Sign-Up and Admin Login -->
+                <div class="LABEL-wrapper">
+                    <p>Don’t have an account? <a href="signup.php" class="text-wrapper-3">Sign Up</a></p>
+                </div>
+                <div class="LABEL-wrapper">
+                    <a href="admin-login.php" class="LABEL-2">Admin Login</a>
+                </div>
             </div>
         </div>
-    </div>
     </div>
 </body>
 
 </html>
 
-
 <?php
-// This page processes the login form submission.
-// The script uses sessions.
+// Login processing script
 
-// Check if the form has been submitted:
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Need two helper files:
@@ -96,9 +68,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Check the login:
     list($check, $data) = check_login($dbc, $_POST['email'], $_POST['pass']);
-
+    echo 'asdfsdasdfasdfasdfasd';
     if ($check) { // OK!
-
+        echo 'asdfsdasdfasdfasdfasd';
         // Set the session data:
         session_start();
         $_SESSION['user_id'] = $data["user_id"];
@@ -114,6 +86,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     mysqli_close($dbc); // Close the database connection.
 
+} else {
+    echo 'form not submitted through post';
 } // End of the main submit conditional.
 
 
@@ -125,6 +99,5 @@ if (isset($errors) && !empty($errors)) {
     }
     echo '</p><p>Please try again.</p>';
 }
-
 
 ?>
