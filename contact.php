@@ -1,6 +1,32 @@
 <?php
 include('inc/session.inc.php');
 require('mysqli_connect.php');
+
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Validate and sanitize input
+    $name = htmlspecialchars(trim($_POST['name']));
+    $email = htmlspecialchars(trim($_POST['email']));
+    $description = htmlspecialchars(trim($_POST['description']));
+
+    // Insert data into the inquiry table
+    $query = "INSERT INTO inquiry (name, email, description) VALUES (?, ?, ?)";
+    $stmt = $dbc->prepare($query);
+    $stmt->bind_param('sss', $name, $email, $description);
+
+    if ($stmt->execute()) {
+        // Redirect or show success message
+        header('Location: contact_success.php');
+        exit();
+    } else {
+        // Handle error
+        echo "<p>There was an error submitting your inquiry. Please try again later.</p>";
+    }
+
+    $stmt->close();
+    $dbc->close();
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -20,7 +46,7 @@ require('mysqli_connect.php');
             <div class="contacts-container">
                 <div class="form-container">
                     <h2>Contact Us</h2>
-                    <form action="submit_contact.php" method="POST">
+                    <form action="contact_success.php" method="POST">
                         <div class="form-group">
                             <input type="text" name="name" placeholder="Your Name" required />
                         </div>

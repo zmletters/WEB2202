@@ -5,7 +5,8 @@ body {
     min-height: 100vh;
     margin: 0;
     padding: 0;
-    background-color: #f9f9f9;
+    background-color: #f6faf1;
+    /* Freshara greenish background */
     display: flex;
     flex-direction: column;
 }
@@ -17,7 +18,8 @@ main {
 
 h2 {
     font-size: 28px;
-    color: #333;
+    color: #2b542c;
+    /* Freshara theme green */
     margin-bottom: 20px;
 }
 
@@ -31,28 +33,41 @@ h2 {
 
 .contacts-container {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: flex-start;
     max-width: 1200px;
     width: 100%;
     margin-top: 20px;
-    background-color: #fff;
+    background-color: #ffffff;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     overflow: hidden;
+    padding: 20px;
 }
 
 /* Form Section */
 .form-container {
-    padding: 40px;
-    width: 50%;
+    padding: 20px;
+    width: 100%;
+    max-width: 600px;
     flex: 1;
+    text-align: center;
 }
 
 .form-container form {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px;
+}
+
+.form-group label {
+    text-align: left;
+    font-size: 16px;
+    color: #2b542c;
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
 }
 
 .form-group input,
@@ -62,11 +77,18 @@ h2 {
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
+    font-family: Arial, sans-serif;
 }
 
 .form-group textarea {
-    height: 100px;
+    height: 120px;
     resize: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #71a365;
+    outline: none;
 }
 
 .btn-submit {
@@ -77,7 +99,9 @@ h2 {
     border-radius: 4px;
     font-size: 16px;
     cursor: pointer;
+    font-weight: bold;
     transition: background-color 0.3s ease;
+    text-transform: uppercase;
 }
 
 .btn-submit:hover {
@@ -86,21 +110,55 @@ h2 {
 
 .form-container img {
     max-width: 100%;
-    height: fit-content;
+    height: auto;
     border-radius: 4px;
 }
 
-/* Map Section */
-/* .map-container {
-    width: 50%;
+/* Success Page */
+.success-page {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    background-color: #f6f7fa;
-} */
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    padding: 20px;
+    background-color: #f6faf1;
+    /* Freshara greenish background */
+}
 
-/* .map-container img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 4px;
-} */
+.success-page h1 {
+    font-size: 28px;
+    color: #2b542c;
+    /* Freshara green */
+    margin-bottom: 15px;
+}
+
+.success-page p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.btn-home {
+    display: inline-block;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #71a365;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-home:hover {
+    background-color: #5e8c54;
+}
+
+.btn-home:focus {
+    outline: none;
+    background-color: #519e4a;
+}
