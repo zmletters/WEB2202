@@ -105,3 +105,39 @@
 .logout-icon:hover {
     opacity: 0.8;
 }
+
+/* Badge Styling */
+.cart-badge,
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background-color: #e74c3c;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 3px 6px;
+    border-radius: 50%;
+    display: inline-block;
+    min-width: 18px;
+    text-align: center;
+}
+
+/* Positioning for Navbar Elements */
+.navbar-cart {
+    position: relative;
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.navbar-notification {
+    position: relative;
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    display: block;
+}

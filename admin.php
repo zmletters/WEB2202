@@ -45,10 +45,60 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_user'])) {
     }
 }
 
+
+// Handle Update Order Status
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_order'])) {
+    $order_id = intval($_POST['order_id']);
+    $status = trim($_POST['status']);
+
+    // Fetch the user's details for the notification
+    $fetch_user_query = "SELECT user_id FROM orders WHERE id = ?";
+    $user_stmt = $dbc->prepare($fetch_user_query);
+    $user_stmt->bind_param('i', $order_id);
+    $user_stmt->execute();
+    $user_result = $user_stmt->get_result();
+
+    if ($user_result->num_rows === 1) {
+        $user = $user_result->fetch_assoc();
+        $user_id = $user['user_id'];
+
+        // Update order status
+        $update_order_query = "UPDATE orders SET status = ? WHERE id = ?";
+        $order_stmt = $dbc->prepare($update_order_query);
+        $order_stmt->bind_param('si', $status, $order_id);
+
+        if ($order_stmt->execute()) {
+            // Insert a notification for the user
+            $message = "Hey! The status of your order for Order ID: $order_id is now $status!";
+            $insert_notification_query = "INSERT INTO notification (user_id, message, is_read) VALUES (?, ?, 0)";
+            $notif_stmt = $dbc->prepare($insert_notification_query);
+            $notif_stmt->bind_param('is', $user_id, $message);
+
+            if ($notif_stmt->execute()) {
+                $success_message = "Order status updated successfully, and user notified!";
+            } else {
+                $error_message = "Order updated, but notification failed: " . $notif_stmt->error;
+            }
+            $notif_stmt->close();
+        } else {
+            $error_message = "Error updating order status: " . $order_stmt->error;
+        }
+        $order_stmt->close();
+    } else {
+        $error_message = "Error finding user for this order.";
+    }
+    $user_stmt->close();
+}
+
+
 // Fetch all users
 $users = $dbc->query("SELECT * FROM users");
-?>
 
+// Fetch all orders
+$orders = $dbc->query("SELECT o.id AS order_id, o.user_id, u.first_name, u.last_name, o.total_amount, o.order_date, o.shipping_address, o.status 
+                       FROM orders o 
+                       INNER JOIN users u ON o.user_id = u.user_id");
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -56,12 +106,14 @@ $users = $dbc->query("SELECT * FROM users");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Manage Users</title>
+    <title>Admin - Manage Users and Orders</title>
     <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/navbar.css" />
 </head>
 
 <body>
-    <h1>Admin - Manage Users</h1>
+    <?php include('inc/navbar.inc.php'); ?>
+    <h1>Admin - Manage Users and Orders</h1>
 
     <!-- Success and Error Messages -->
     <?php if (!empty($success_message)) echo "<p class='success'>$success_message</p>"; ?>
@@ -88,7 +140,6 @@ $users = $dbc->query("SELECT * FROM users");
                 <tr>
                     <!-- Row with Editable Form -->
                     <form action="admin.php" method="POST">
-                        <!-- Non-editable User ID -->
                         <td>
                             <input type="hidden" name="user_id" value="<?= $row['user_id'] ?>">
                             <?= $row['user_id'] ?>
@@ -114,13 +165,64 @@ $users = $dbc->query("SELECT * FROM users");
                                 <option value="admin" <?= $row['role'] == 'admin' ? 'selected' : '' ?>>Admin</option>
                             </select>
                         </td>
-                        <!-- Non-editable Registration Date -->
                         <td>
                             <?= $row['reg_date'] ?>
                         </td>
                         <td>
                             <button type="submit" name="save_user" class="save-button">Save</button>
                             <button type="submit" name="delete_user" class="delete-button">Delete</button>
+                        </td>
+                    </form>
+                </tr>
+            <?php endwhile; ?>
+        </tbody>
+    </table>
+
+    <!-- Orders Table -->
+    <h2>All Orders</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>User</th>
+                <th>Total Amount</th>
+                <th>Order Date</th>
+                <th>Shipping Address</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php while ($order = $orders->fetch_assoc()) : ?>
+                <tr>
+                    <!-- Row with Editable Form -->
+                    <form action="admin.php" method="POST">
+                        <td>
+                            <input type="hidden" name="order_id" value="<?= $order['order_id'] ?>">
+                            <?= $order['order_id'] ?>
+                        </td>
+                        <td>
+                            <?= htmlspecialchars($order['first_name'] . ' ' . $order['last_name']) ?>
+                        </td>
+                        <td>
+                            RM <?= number_format($order['total_amount'], 2) ?>
+                        </td>
+                        <td>
+                            <?= $order['order_date'] ?>
+                        </td>
+                        <td>
+                            <?= htmlspecialchars($order['shipping_address']) ?>
+                        </td>
+                        <td>
+                            <select name="status" required>
+                                <option value="pending" <?= $order['status'] == 'pending' ? 'selected' : '' ?>>Pending</option>
+                                <option value="shipped" <?= $order['status'] == 'shipped' ? 'selected' : '' ?>>Shipped</option>
+                                <option value="completed" <?= $order['status'] == 'completed' ? 'selected' : '' ?>>Completed</option>
+                                <option value="canceled" <?= $order['status'] == 'canceled' ? 'selected' : '' ?>>Canceled</option>
+                            </select>
+                        </td>
+                        <td>
+                            <button type="submit" name="update_order" class="update-button">Update</button>
                         </td>
                     </form>
                 </tr>

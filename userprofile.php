@@ -24,6 +24,133 @@ if ($result->num_rows == 1) {
     exit();
 }
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_profile'])) {
+    // Collect form data
+    $first_name = trim($_POST['first_name']);
+    $last_name = trim($_POST['last_name']);
+    $email = trim($_POST['email']);
+    $phone = trim($_POST['phone']);
+    $address = trim($_POST['address']);
+
+    // Validate form data
+    $errors = [];
+
+    if (empty($first_name)) {
+        $errors[] = "First name is required.";
+    }
+
+    if (empty($last_name)) {
+        $errors[] = "Last name is required.";
+    }
+
+    if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = "A valid email address is required.";
+    }
+
+    if (empty($errors)) {
+        // Update the user's data in the database
+        $query = "UPDATE users 
+                  SET first_name = ?, last_name = ?, email = ?, phone_no = ?, address = ? 
+                  WHERE user_id = ?";
+        $stmt = $dbc->prepare($query);
+        $stmt->bind_param('sssssi', $first_name, $last_name, $email, $phone, $address, $user_id);
+
+        if ($stmt->execute()) {
+            // Re-fetch the updated user data
+            $query = "SELECT user_id, first_name, last_name, email, address, phone_no FROM users WHERE user_id = ?";
+            $stmt = $dbc->prepare($query);
+            $stmt->bind_param('i', $user_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result->num_rows == 1) {
+                $user_data = $result->fetch_assoc(); // Refresh the $user_data variable with updated data
+            }
+
+            header('Location: profile_update_success.php');
+            exit();
+        } else {
+            $errors[] = "Failed to update your profile. Please try again.";
+        }
+    }
+
+    // Display errors if any
+    if (!empty($errors)) {
+        echo '<p class="error">The following error(s) occurred:<br>';
+        foreach ($errors as $msg) {
+            echo " - $msg<br>";
+        }
+        echo '</p>';
+    }
+}
+
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_password'])) {
+    $errors = [];
+    $user_id = $_SESSION['user_id']; // Assuming the user ID is stored in the session
+
+    // Validate the current password
+    if (empty($_POST['current_password'])) {
+        $errors[] = 'You forgot to enter your current password.';
+    } else {
+        $current_password = mysqli_real_escape_string($dbc, trim($_POST['current_password']));
+    }
+
+    // Validate the new password and confirmation
+    if (empty($_POST['new_password'])) {
+        $errors[] = 'You forgot to enter your new password.';
+    } else {
+        $new_password = mysqli_real_escape_string($dbc, trim($_POST['new_password']));
+    }
+
+    if (empty($_POST['confirm_password'])) {
+        $errors[] = 'You forgot to confirm your new password.';
+    } elseif ($_POST['new_password'] !== $_POST['confirm_password']) {
+        $errors[] = 'Your new password and confirmation do not match.';
+    }
+
+    if (empty($errors)) {
+        // Fetch the current hashed password from the database
+        $query = "SELECT pass FROM users WHERE user_id = ?";
+        $stmt = $dbc->prepare($query);
+        $stmt->bind_param('i', $user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows === 1) {
+            $row = $result->fetch_assoc();
+
+            // Verify the current password
+            if (sha1($current_password) == $row['pass']) {
+                // Update the new password in the database
+                $update_query = "UPDATE users SET pass = SHA1(?) WHERE user_id = ?";
+                $update_stmt = $dbc->prepare($update_query);
+                $update_stmt->bind_param('si', $new_password, $user_id);
+
+                if ($update_stmt->execute()) {
+                    echo '<p class="success">Your password has been changed successfully!</p>';
+                } else {
+                    $errors[] = 'Your password could not be changed due to a system error.';
+                }
+            } else {
+                $errors[] = 'Your current password is incorrect.';
+            }
+        } else {
+            $errors[] = 'User not found.';
+        }
+    }
+
+    // Display errors if any
+    if (!empty($errors)) {
+        echo '<p class="error">The following error(s) occurred:<br>';
+        foreach ($errors as $msg) {
+            echo " - $msg<br>";
+        }
+        echo '</p>';
+    }
+
+    mysqli_close($dbc); // Close the database connection
+}
 
 
 ?>
@@ -136,119 +263,6 @@ if ($result->num_rows == 1) {
 <?php
 
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_profile'])) {
-    // Collect form data
-    $first_name = trim($_POST['first_name']);
-    $last_name = trim($_POST['last_name']);
-    $email = trim($_POST['email']);
-    $phone = trim($_POST['phone']);
-    $address = trim($_POST['address']);
-
-    // Validate form data
-    $errors = [];
-
-    if (empty($first_name)) {
-        $errors[] = "First name is required.";
-    }
-
-    if (empty($last_name)) {
-        $errors[] = "Last name is required.";
-    }
-
-    if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errors[] = "A valid email address is required.";
-    }
-
-    // if (empty($phone) || !preg_match('/^\+?\d{8,15}$/', $phone)) {
-    //     $errors[] = "A valid phone number is required (e.g., +60123456789).";
-    // }
-
-    if (empty($errors)) {
-        // Update the user's data in the database
-        $query = "UPDATE users 
-                  SET first_name = ?, last_name = ?, email = ?, phone_no = ?, address = ? 
-                  WHERE user_id = ?";
-        $stmt = $dbc->prepare($query);
-        $stmt->bind_param('sssssi', $first_name, $last_name, $email, $phone, $address, $user_id);
-
-        if ($stmt->execute()) {
-            // Successfully updated
-            header('Refresh:1; URL=user_profile.php?update_success=1');
-            exit();
-        } else {
-            // Database update failed
-            $errors[] = "Failed to update your profile. Please try again.";
-        }
-    }
-}
-
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_password'])) {
-    $errors = [];
-    $user_id = $_SESSION['user_id']; // Assuming the user ID is stored in the session
-
-    // Validate the current password
-    if (empty($_POST['current_password'])) {
-        $errors[] = 'You forgot to enter your current password.';
-    } else {
-        $current_password = mysqli_real_escape_string($dbc, trim($_POST['current_password']));
-    }
-
-    // Validate the new password and confirmation
-    if (empty($_POST['new_password'])) {
-        $errors[] = 'You forgot to enter your new password.';
-    } else {
-        $new_password = mysqli_real_escape_string($dbc, trim($_POST['new_password']));
-    }
-
-    if (empty($_POST['confirm_password'])) {
-        $errors[] = 'You forgot to confirm your new password.';
-    } elseif ($_POST['new_password'] !== $_POST['confirm_password']) {
-        $errors[] = 'Your new password and confirmation do not match.';
-    }
-
-    if (empty($errors)) {
-        // Fetch the current hashed password from the database
-        $query = "SELECT pass FROM users WHERE user_id = ?";
-        $stmt = $dbc->prepare($query);
-        $stmt->bind_param('i', $user_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        if ($result->num_rows === 1) {
-            $row = $result->fetch_assoc();
-
-            // Verify the current password
-            if (sha1($current_password) == $row['pass']) {
-                // Update the new password in the database
-                $update_query = "UPDATE users SET pass = SHA1(?) WHERE user_id = ?";
-                $update_stmt = $dbc->prepare($update_query);
-                $update_stmt->bind_param('si', $new_password, $user_id);
-
-                if ($update_stmt->execute()) {
-                    echo '<p class="success">Your password has been changed successfully!</p>';
-                } else {
-                    $errors[] = 'Your password could not be changed due to a system error.';
-                }
-            } else {
-                $errors[] = 'Your current password is incorrect.';
-            }
-        } else {
-            $errors[] = 'User not found.';
-        }
-    }
-
-    // Display errors if any
-    if (!empty($errors)) {
-        echo '<p class="error">The following error(s) occurred:<br>';
-        foreach ($errors as $msg) {
-            echo " - $msg<br>";
-        }
-        echo '</p>';
-    }
-
-    mysqli_close($dbc); // Close the database connection
-}
 
 
 

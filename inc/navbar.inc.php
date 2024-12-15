@@ -9,6 +9,12 @@
         <a href="products.php" class="navbar-link">Products</a>
         <a href="about.php" class="navbar-link">About Us</a>
         <a href="contact.php" class="navbar-link">Contact</a>
+        <?php
+        // Show admin link only if the user is an admin
+        if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
+            echo '<a href="admin.php" class="navbar-link">Administration</a>';
+        }
+        ?>
     </div>
     <div class="navbar-right">
         <div class="navbar-cart">
@@ -36,12 +42,32 @@
             ?>
         </div>
         <div class="navbar-notification">
-            <img src="img/notification-bell.svg" alt="Notifications" class="icon">
+            <a href="notification.php">
+                <img src="img/notification-bell.svg" alt="Notifications" class="icon">
+            </a>
         </div>
         <div class="navbar-user">
             <a href="userprofile.php">
                 <img src="img/user-circle.svg" alt="User" class="icon">
             </a>
+            <?php
+            // Database query to fetch unread notifications count
+            if (isset($_SESSION['user_id'])) {
+                $query = "SELECT COUNT(*) AS unread_count FROM notification WHERE user_id = ? AND is_read = 0";
+                $stmt = $dbc->prepare($query);
+                $stmt->bind_param('i', $userId);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $notificationData = $result->fetch_assoc();
+                $unreadCount = $notificationData['unread_count'] ?? 0;
+
+                // Display badge only if there are unread notifications
+                if ($unreadCount > 0) {
+                    echo '<span class="notification-badge">' . $unreadCount . '</span>';
+                }
+                $stmt->close();
+            }
+            ?>
             <span class="user-action">
                 <?php
                 if (isset($_SESSION['first_name'])) {

@@ -1,0 +1,90 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f6faf1;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    min-height: 60vh;
+}
+
+h1 {
+    font-size: 24px;
+    color: #2b542c;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Notifications List */
+.notifications-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.notification {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.notification.unread {
+    background-color: #eef4ea;
+    /* Light green for unread notifications */
+}
+
+.notification.read {
+    background-color: #ffffff;
+    /* White for read notifications */
+}
+
+.notification .message {
+    max-width: 80%;
+}
+
+.notification .message p {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.notification .message .date {
+    display: block;
+    font-size: 12px;
+    color: #777;
+    margin-top: 5px;
+}
+
+/* Mark as Read Button */
+.mark-read-form {
+    margin: 0;
+}
+
+.mark-read-button {
+    background-color: #71a365;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.mark-read-button:hover {
+    background-color: #5e8c54;
+}

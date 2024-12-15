@@ -1,30 +1,149 @@
+/* Meyer Reset CSS for consistent styles across browsers */
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+
+* {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+}
+
+html,
 body {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin: 0;
+    height: 100%;
+    font-family: 'Inter', Helvetica, Arial, sans-serif;
 }
 
-.login-container {
-    display: flex;
-    flex-direction: row;
-    border-radius: 8px;
-    overflow: hidden;
-    width: 80%;
-    max-width: 1000px;
-    height: 500px;
+button:focus-visible {
+    outline: 2px solid #4a90e2;
 }
 
-.left-columnn {
+a {
+    text-decoration: none;
+}
+
+.sign-in {
+    display: flex;
+    height: 100%;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    min-width: 1280px;
+    background-color: #fff;
+}
+
+.sign-in .aside {
     flex: 1;
-    background-image: url("/img/autumnleaves.jpg");
-    background-size: cover;
-    background-position: center;
+    position: relative;
+    height: 100%;
 }
 
-.right-column {
-    flex: 1;
+.sign-in .aside img.background-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.sign-in .aside .aside-content {
+    position: relative;
+    z-index: 2;
+    padding: 5%;
+    color: #fff;
+}
+
+.sign-in .text-wrapper {
+    margin-top: 5%;
+    font-weight: bold;
+    font-size: 40px;
+    line-height: 48px;
+}
+
+.sign-in .tagline {
+    font-size: 18px;
+    line-height: 30px;
+}
+
+.container {
+    height: 100%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    width: 35%;
     align-items: center;
+    justify-content: center;
+}
+
+
+.sign-in .form-login-default {
+    width: 424px;
+}
+
+.sign-in .heading {
+    font-weight: 600;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.sign-in .form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.sign-in .x-form-group {
+    width: 100%;
+}
+
+.sign-in .form-title {
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #425466;
+}
+
+.sign-in .input {
+    width: 100%;
+    height: 46px;
+    background-color: #edf2f7;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 15px;
+    color: #7a828a;
+    border: none;
+}
+
+.sign-in .button {
+    width: 100%;
+    padding: 16px;
+    background-color: #71a365;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 90px;
+    cursor: pointer;
+    border: none;
+    margin-top: 25px;
+}
+
+.sign-in .form-help-text-2 {
+    font-size: 11px;
+    color: #777e90;
+    text-align: right;
+    margin-top: 5px;
+}
+
+.sign-in .LABEL-wrapper {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.sign-in .LABEL-wrapper .text-wrapper-3 {
+    color: #131416;
+    font-weight: bold;
+}
+
+.sign-in .LABEL-wrapper .LABEL-2 {
+    color: #425466;
 }

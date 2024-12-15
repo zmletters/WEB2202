@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | Freshara</title>
-    <link rel="stylesheet" href="css/loginstyle.css">
+    <link rel="stylesheet" href="css/login.css">
 </head>
 
 <body>
@@ -74,6 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         session_start();
         $_SESSION['user_id'] = $data["user_id"];
         $_SESSION['first_name'] = $data["first_name"];
+        $_SESSION['role'] = $data["role"];
 
         // Redirect:
         redirect_user('home.php');
