@@ -46,6 +46,7 @@ h2 {
 .form-container {
     padding: 40px;
     width: 50%;
+    flex: 1;
 }
 
 .form-container form {
@@ -83,17 +84,23 @@ h2 {
     background-color: #7ca675;
 }
 
+.form-container img {
+    max-width: 100%;
+    height: fit-content;
+    border-radius: 4px;
+}
+
 /* Map Section */
-.map-container {
+/* .map-container {
     width: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #f6f7fa;
-}
+} */
 
-.map-container img {
+/* .map-container img {
     max-width: 100%;
     height: auto;
     border-radius: 4px;
-}
+} */

@@ -33,8 +33,8 @@ require('mysqli_connect.php');
                         <button type="submit" class="btn-submit">Send</button>
                     </form>
                 </div>
-                <div class="map-container">
-                    <img src="img/map-placeholder.svg" alt="Map" />
+                <div class="form-container">
+                    <img src="img/map.png" alt="Map" />
                 </div>
             </div>
 
