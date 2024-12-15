@@ -19,7 +19,7 @@
             // Database query to fetch cart item count
             if (isset($_SESSION['user_id'])) {
                 $userId = $_SESSION['user_id'];
-                $query = "SELECT SUM(quantity) AS total_items FROM cart WHERE user_id = ?";
+                $query = "SELECT SUM(quantity) AS total_items FROM cart WHERE user_id = ? AND status = 'active'";
                 $stmt = $dbc->prepare($query);
                 $stmt->bind_param('i', $userId);
                 $stmt->execute();

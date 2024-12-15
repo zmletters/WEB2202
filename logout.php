@@ -1,5 +1,5 @@
 <?php
-session_start();					 // Access the existing session.
+include('inc/session.inc.php');					 // Access the existing session.
 require('inc/functions.inc.php');
 
 // If no session variable exists, redirect the user:

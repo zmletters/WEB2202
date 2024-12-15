@@ -1,0 +1,101 @@
+/* General Styles */
+body {
+    font-family: "Poppins", Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f6faf1;
+    color: #333;
+}
+
+main {
+    padding: 20px;
+}
+
+/* Confirmation Page Styles */
+.confirmation-page {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+}
+
+.confirmation-page h1 {
+    font-size: 28px;
+    color: #2b542c;
+    margin-bottom: 20px;
+}
+
+.confirmation-page p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+.confirmation-page h2 {
+    font-size: 24px;
+    color: #2b542c;
+    margin: 20px 0 15px;
+}
+
+/* Order Details */
+.order-details {
+    text-align: left;
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.order-details strong {
+    color: #2b542c;
+}
+
+/* Back to Shopping Button */
+.back-to-products {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #71a365;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.back-to-products:hover {
+    background-color: #5e8c54;
+}
+
+.back-to-products:focus {
+    outline: none;
+    background-color: #519e4a;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .confirmation-page {
+        padding: 15px;
+    }
+
+    .confirmation-page h1 {
+        font-size: 24px;
+    }
+
+    .confirmation-page h2 {
+        font-size: 20px;
+    }
+
+    .order-details {
+        font-size: 14px;
+    }
+
+    .back-to-products {
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+}

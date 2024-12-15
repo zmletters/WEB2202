@@ -1,5 +1,5 @@
 <?php
-session_start();
+include('inc/session.inc.php');
 include('mysqli_connect.php'); // Include database connection
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cart_id'])) {

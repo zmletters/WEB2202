@@ -1,8 +1,9 @@
 <?php
-session_start();
+include('inc/session.inc.php');
 require('mysqli_connect.php');
 require('inc/functions.inc.php');
 
+// Handle Add to Cart Logic
 // Handle Add to Cart Logic
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     check_user_logged_in();
@@ -13,12 +14,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Validate input
     if ($user_id && $product_id && $quantity > 0) {
-        // Insert or update the cart
-        $query = "INSERT INTO cart (user_id, product_id, quantity) 
-                  VALUES (?, ?, ?) 
-                  ON DUPLICATE KEY UPDATE quantity = quantity + ?";
+        // Check if the product with 'active' status already exists in the cart
+        $query = "
+            INSERT INTO cart (user_id, product_id, quantity, status) 
+            VALUES (?, ?, ?, 'active') 
+            ON DUPLICATE KEY UPDATE 
+                quantity = quantity + VALUES(quantity), 
+                status = 'active'
+        ";
         $stmt = $dbc->prepare($query);
-        $stmt->bind_param('iiii', $user_id, $product_id, $quantity, $quantity);
+        $stmt->bind_param('iii', $user_id, $product_id, $quantity);
 
         if ($stmt->execute()) {
             // Optionally redirect to cart or show a success message

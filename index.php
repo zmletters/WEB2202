@@ -4,7 +4,7 @@
 
 
 <?php
-session_start();
+include('inc/session.inc.php');
 if (!isset($_SESSION['user_id'])) {
 
     // Need the functions:

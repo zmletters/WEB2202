@@ -1,0 +1,89 @@
+/* General Styles */
+body {
+    font-family: "Poppins", Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f6faf1;
+    color: #333;
+}
+
+h1,
+h2 {
+    color: #2b542c;
+    text-align: center;
+}
+
+/* Success and Error Messages */
+.success {
+    color: #155724;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+table th,
+table td {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #eef4ea;
+    color: #2b542c;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+table tr:hover {
+    background-color: #f6faf1;
+}
+
+/* Button Styles */
+button {
+    padding: 8px 12px;
+    font-size: 12px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.save-button {
+    background-color: #71a365;
+    color: #fff;
+}
+
+.save-button:hover {
+    background-color: #5e8c54;
+}
+
+.delete-button {
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+.delete-button:hover {
+    background-color: #c0392b;
+}

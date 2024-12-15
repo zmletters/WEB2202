@@ -1,5 +1,5 @@
 <?php
-session_start();
+include('inc/session.inc.php');
 require('mysqli_connect.php');
 
 // Check if user is logged in and has a valid session

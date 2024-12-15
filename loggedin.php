@@ -1,7 +1,7 @@
 <?php
 // The user is redirected here from login.php.
 
-session_start(); // Start the session.
+include('inc/session.inc.php'); // Start the session.
 
 // If no session value is present, redirect the user:
 if (!isset($_SESSION['user_id'])) {

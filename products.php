@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+include('inc/session.inc.php');
 
 require('mysqli_connect.php');
 
@@ -15,7 +15,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['product_id'])) {
         // Insert or update the cart
         $query = "INSERT INTO cart (user_id, product_id, quantity) 
                   VALUES (?, ?, ?) 
-                  ON DUPLICATE KEY UPDATE quantity = quantity + ?";
+                  ON DUPLICATE KEY UPDATE quantity = quantity + ?,
+                  status = 'active'";
         $stmt = $dbc->prepare($query);
         $stmt->bind_param('iiii', $user_id, $product_id, $quantity, $quantity);
 

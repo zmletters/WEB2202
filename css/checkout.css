@@ -1,0 +1,160 @@
+/* General Styles */
+body {
+    font-family: "Poppins", Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f6faf1;
+    color: #333;
+}
+
+main {
+    padding: 20px;
+}
+
+/* Checkout Page Styles */
+.checkout-page {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.checkout-page h1 {
+    font-size: 28px;
+    color: #2b542c;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.error-message {
+    color: #721c24;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Cart Table Styles */
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.cart-table th,
+.cart-table td {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.cart-table th {
+    background-color: #eef4ea;
+    color: #2b542c;
+    font-weight: bold;
+}
+
+.cart-table td {
+    vertical-align: middle;
+}
+
+.cart-table tr:hover {
+    background-color: #f6faf1;
+}
+
+/* Form Styles */
+form {
+    margin-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    color: #2b542c;
+    margin-bottom: 8px;
+}
+
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    resize: none;
+    transition: border-color 0.3s ease;
+}
+
+.form-group textarea:focus {
+    border-color: #71a365;
+    outline: none;
+}
+
+/* Total Amount */
+.total-amount {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: right;
+    color: #2b542c;
+    margin-bottom: 20px;
+}
+
+/* Order Button */
+.order-btn {
+    display: block;
+    width: 100%;
+    background-color: #71a365;
+    color: #ffffff;
+    border: none;
+    padding: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.order-btn:hover {
+    background-color: #5e8c54;
+}
+
+.order-btn:focus {
+    outline: none;
+    background-color: #519e4a;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .checkout-page {
+        padding: 15px;
+    }
+
+    .cart-table th,
+    .cart-table td {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .form-group textarea {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .total-amount {
+        font-size: 16px;
+    }
+
+    .order-btn {
+        font-size: 14px;
+        padding: 12px;
+    }
+}
