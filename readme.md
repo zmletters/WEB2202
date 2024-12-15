@@ -22,7 +22,14 @@ user-profile
 
 admin
 
+'/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$%!*\-])[A-Za-z\d@#$%!*\-]{8,}$/'
 
+/^: Start of the regex.
+(?=.*[A-Za-z]): Ensures the password contains at least one letter.
+(?=.*\d): Ensures the password contains at least one digit.
+(?=.*[@#$%!*\-]): Ensures the password contains at least one of the allowed symbols (@, #, $, %, !, *, -).
+[A-Za-z\d@#$%!*\-]{8,}: Matches passwords that are at least 8 characters long and contain letters, digits, or the specified symbols.
+$/: End of the regex.
 
 
 beautify

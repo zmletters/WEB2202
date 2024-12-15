@@ -17,8 +17,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['save_user'])) {
     $first_name = trim($_POST['first_name']);
     $last_name = trim($_POST['last_name']);
     $email = trim($_POST['email']);
-    $address = trim($_POST['address']);
-    $phone_no = trim($_POST['phone_no']);
+    $address = trim($_POST['address']) ?: null;
+    $phone_no = trim($_POST['phone_no']) ?: null;
     $role = trim($_POST['role']);
 
     $stmt = $dbc->prepare("UPDATE users SET first_name = ?, last_name = ?, email = ?, address = ?, phone_no = ?, role = ? WHERE user_id = ?");
@@ -154,14 +154,14 @@ $orders = $dbc->query("SELECT o.id AS order_id, o.user_id, u.first_name, u.last_
                             <input type="email" name="email" value="<?= htmlspecialchars($row['email']) ?>" required>
                         </td>
                         <td>
-                            <input type="text" name="address" value="<?= htmlspecialchars($row['address']) ?>" required>
+                            <input type="text" name="address" value="<?= htmlspecialchars($row['address']) ?>">
                         </td>
                         <td>
-                            <input type="text" name="phone_no" value="<?= htmlspecialchars($row['phone_no']) ?>" required>
+                            <input type="text" name="phone_no" value="<?= htmlspecialchars($row['phone_no']) ?>">
                         </td>
                         <td>
                             <select name="role" required>
-                                <option value="user" <?= $row['role'] == 'user' ? 'selected' : '' ?>>User</option>
+                                <option value="user" <?= $row['role'] == 'customer' ? 'selected' : '' ?>>Customer</option>
                                 <option value="admin" <?= $row['role'] == 'admin' ? 'selected' : '' ?>>Admin</option>
                             </select>
                         </td>
@@ -170,6 +170,12 @@ $orders = $dbc->query("SELECT o.id AS order_id, o.user_id, u.first_name, u.last_
                         </td>
                         <td>
                             <button type="submit" name="save_user" class="save-button">Save</button>
+                        </td>
+                    </form>
+                    <!-- Separate Delete Form -->
+                    <form action="admin.php" method="POST">
+                        <td>
+                            <input type="hidden" name="user_id" value="<?= $row['user_id'] ?>">
                             <button type="submit" name="delete_user" class="delete-button">Delete</button>
                         </td>
                     </form>

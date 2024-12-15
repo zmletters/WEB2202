@@ -37,6 +37,11 @@ a {
     height: 100%;
 }
 
+.sign-in .aside a {
+    text-decoration: none;
+    color: white;
+}
+
 .sign-in .aside img.background-img {
     position: absolute;
     top: 0;
@@ -146,4 +151,8 @@ a {
 
 .sign-in .LABEL-wrapper .LABEL-2 {
     color: #425466;
+}
+
+.error {
+    color: red;
 }

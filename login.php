@@ -1,3 +1,51 @@
+<?php
+// Login processing script
+
+$errors = [
+    'email' => '',
+    'password' => '',
+    'general' => ''
+];
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    // Need two helper files:
+    require('inc/login_functions.inc.php');
+    require('mysqli_connect.php');
+
+    // Validate email
+    if (empty($_POST['email'])) {
+        $errors['email'] = 'You forgot to enter your email.';
+    } elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+        $errors['email'] = 'Invalid email format.';
+    }
+
+    // Validate password
+    if (empty($_POST['pass'])) {
+        $errors['password'] = 'You forgot to enter your password.';
+    }
+
+    if (array_filter($errors) === []) {
+        // Check the login:
+        list($check, $data) = check_login($dbc, $_POST['email'], $_POST['pass']);
+
+        if ($check) { // OK!
+            // Set the session data:
+            session_start();
+            $_SESSION['user_id'] = $data["user_id"];
+            $_SESSION['first_name'] = $data["first_name"];
+            $_SESSION['role'] = $data["role"];
+
+            // Redirect:
+            redirect_user('home.php');
+        } else { // Unsuccessful!
+            $errors['general'] = 'Invalid email or password. Please try again.';
+        }
+    }
+
+    mysqli_close($dbc); // Close the database connection.
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,7 +62,9 @@
         <div class="aside">
             <img src="img/signin.jpg" alt="Background Image" class="background-img">
             <div class="aside-content">
-                <h1 class="text-wrapper">Welcome to Freshara!</h1>
+
+                <h1 class="text-wrapper"><a href="home.php">Welcome to Freshara!</a></h1>
+
                 <p class="tagline">Where Sustainability Meets Zero Hunger.</p>
             </div>
         </div>
@@ -23,77 +73,38 @@
         <div class="container">
             <div class="form-login-default">
                 <h2 class="heading">Welcome back!</h2>
-                <form class="form" method='post'>
+
+                <!-- General Error Message -->
+                <?php if (!empty($errors['general'])): ?>
+                    <p class="error"><?= $errors['general'] ?></p>
+                <?php endif; ?>
+
+                <form class="form" method="post">
                     <!-- Email Input -->
                     <div class="x-form-group">
                         <label for="email" class="form-title">E-mail</label>
-                        <input name="email" type="email" class="input" placeholder="Type your e-mail" required>
+                        <input name="email" type="email" class="input" placeholder="Type your e-mail" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" required>
+                        <small class="error"><?= $errors['email'] ?></small>
                     </div>
 
                     <!-- Password Input -->
                     <div class="x-form-group">
                         <label for="password" class="form-title">Password</label>
                         <input name="pass" type="password" class="input" placeholder="Type your password" required>
+                        <small class="error"><?= $errors['password'] ?></small>
                     </div>
 
                     <!-- Submit Button -->
                     <button type="submit" name="submit" value="Login" class="button">Sign In</button>
                 </form>
 
-                <!-- Links for Sign-Up and Admin Login -->
+                <!-- Links for Sign-Up -->
                 <div class="LABEL-wrapper">
                     <p>Don’t have an account? <a href="signup.php" class="text-wrapper-3">Sign Up</a></p>
                 </div>
-
             </div>
         </div>
     </div>
 </body>
 
 </html>
-
-<?php
-// Login processing script
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-    // Need two helper files:
-    require('inc/login_functions.inc.php');
-    require('mysqli_connect.php');
-
-    // Need the database connection:
-    // $dbc = @mysqli_connect("localhost", "root", "", "db_user") or die('Could not connect to MySQL: ' . mysqli_connect_error());
-
-    // Check the login:
-    list($check, $data) = check_login($dbc, $_POST['email'], $_POST['pass']);
-
-    if ($check) { // OK!
-        // Set the session data:
-        session_start();
-        $_SESSION['user_id'] = $data["user_id"];
-        $_SESSION['first_name'] = $data["first_name"];
-        $_SESSION['role'] = $data["role"];
-
-        // Redirect:
-        redirect_user('home.php');
-    } else { // Unsuccessful!
-
-        // Assign $data to $errors for login_page.inc.php:
-        $errors = $data;
-    }
-
-    mysqli_close($dbc); // Close the database connection.
-
-} // End of the main submit conditional.
-
-
-if (isset($errors) && !empty($errors)) {
-    echo '<h1>Error!</h1>
-	<p class="error">The following error(s) occurred:<br />';
-    foreach ($errors as $msg) {
-        echo " - $msg<br />\n";
-    }
-    echo '</p><p>Please try again.</p>';
-}
-
-?>

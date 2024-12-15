@@ -96,13 +96,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_password'])) {
         $current_password = mysqli_real_escape_string($dbc, trim($_POST['current_password']));
     }
 
-    // Validate the new password and confirmation
+    // Validate the new password
     if (empty($_POST['new_password'])) {
         $errors[] = 'You forgot to enter your new password.';
+    } elseif (!preg_match('/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$%!*\-])[A-Za-z\d@#$%!*\-]{8,}$/', $_POST['new_password'])) {
+        $errors[] = 'New password must be at least 8 characters long, include letters, numbers.';
     } else {
         $new_password = mysqli_real_escape_string($dbc, trim($_POST['new_password']));
     }
 
+    // Validate confirm password
     if (empty($_POST['confirm_password'])) {
         $errors[] = 'You forgot to confirm your new password.';
     } elseif ($_POST['new_password'] !== $_POST['confirm_password']) {
@@ -128,7 +131,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_password'])) {
                 $update_stmt->bind_param('si', $new_password, $user_id);
 
                 if ($update_stmt->execute()) {
-                    echo '<p class="success">Your password has been changed successfully!</p>';
+                    // Redirect to success page
+                    header('Location: password_update_success.php');
+                    exit();
                 } else {
                     $errors[] = 'Your password could not be changed due to a system error.';
                 }
@@ -148,9 +153,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_password'])) {
         }
         echo '</p>';
     }
-
-    mysqli_close($dbc); // Close the database connection
 }
+
 
 
 ?>
@@ -249,6 +253,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_password'])) {
                     <div class="form-actions">
                         <button type="submit" name="update_password" class="btn-update">Update Password</button>
                     </div>
+                </form>
+
             </section>
         </div>
 

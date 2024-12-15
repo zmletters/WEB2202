@@ -56,6 +56,11 @@ a {
     color: #fff;
 }
 
+.sign-up .aside a {
+    text-decoration: none;
+    color: inherit;
+}
+
 .sign-up .text-wrapper {
     margin-top: 5%;
     font-weight: bold;
@@ -165,4 +170,36 @@ a {
 
 .sign-up .LABEL-wrapper .text-wrapper-3:hover {
     color: #4a90e2;
+}
+
+.error {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+    display: block;
+}
+
+
+/* Error Messages Section */
+.form-errors {
+    background-color: #ffe6e6;
+    /* Light red background */
+    border: 1px solid #ff4d4d;
+    /* Red border */
+    color: #ff1a1a;
+    /* Bright red text */
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.form-errors ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.form-errors li {
+    font-size: 14px;
+    line-height: 1.5;
 }

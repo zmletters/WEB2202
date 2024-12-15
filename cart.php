@@ -55,67 +55,70 @@ if (isset($_SESSION['user_id'])) {
     <?php include('inc/navbar.inc.php'); ?>
     <main>
         <div class="cart-page">
-
-
             <div class="cart-container">
                 <h1>Cart</h1>
-                <table class="cart-table">
-                    <thead>
-                        <tr>
-                            <th>Item</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Total Price</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($cartItems as $item): ?>
+                <?php if (!empty($cartItems)): ?>
+                    <table class="cart-table">
+                        <thead>
                             <tr>
-                                <td>
-                                    <div class="cart-item">
-                                        <img src="<?php echo $item['image_url']; ?>" alt="<?php echo htmlspecialchars($item['product_name']); ?>" class="cart-item-image">
-                                        <span><?php echo htmlspecialchars($item['product_name']); ?></span>
-                                    </div>
-                                </td>
-                                <td>RM <?php echo number_format($item['price'], 2); ?></td>
-                                <td>
-                                    <div class="quantity-control">
-                                        <!-- Quantity Update Form -->
-                                        <form action="update_cart.php" method="POST" class="update-quantity-form">
-                                            <input type="hidden" name="cart_id" value="<?php echo $item['cart_id']; ?>">
-                                            <button type="submit" name="action" value="decrement" class="quantity-btn">-</button>
-                                            <input type="text" name="quantity" value="<?php echo $item['quantity']; ?>" class="quantity-input" readonly>
-                                            <button type="submit" name="action" value="increment" class="quantity-btn">+</button>
-                                        </form>
-                                    </div>
-                                </td>
-                                <td>RM <?php echo number_format($item['price'] * $item['quantity'], 2); ?></td>
-                                <td>
-                                    <form action="remove_from_cart.php" method="POST" style="display: inline;">
-                                        <input type="hidden" name="cart_id" value="<?php echo $item['cart_id']; ?>">
-                                        <button type="submit" class="remove-btn">X Remove</button>
-                                    </form>
-                                </td>
+                                <th>Item</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total Price</th>
+                                <th>Action</th>
                             </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-                <div class="cart-footer">
-                    <a href="products.php" class="back-to-shopping">&larr; Back to shopping</a>
-                    <div class="total-price">
-                        Total Price: <span>RM <?php echo number_format(array_sum(array_map(fn($item) => $item['price'] * $item['quantity'], $cartItems)), 2); ?></span>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($cartItems as $item): ?>
+                                <tr>
+                                    <td>
+                                        <div class="cart-item">
+                                            <img src="<?php echo $item['image_url']; ?>" alt="<?php echo htmlspecialchars($item['product_name']); ?>" class="cart-item-image">
+                                            <span><?php echo htmlspecialchars($item['product_name']); ?></span>
+                                        </div>
+                                    </td>
+                                    <td>RM <?php echo number_format($item['price'], 2); ?></td>
+                                    <td>
+                                        <div class="quantity-control">
+                                            <!-- Quantity Update Form -->
+                                            <form action="update_cart.php" method="POST" class="update-quantity-form">
+                                                <input type="hidden" name="cart_id" value="<?php echo $item['cart_id']; ?>">
+                                                <button type="submit" name="action" value="decrement" class="quantity-btn">-</button>
+                                                <input type="text" name="quantity" value="<?php echo $item['quantity']; ?>" class="quantity-input" readonly>
+                                                <button type="submit" name="action" value="increment" class="quantity-btn">+</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                    <td>RM <?php echo number_format($item['price'] * $item['quantity'], 2); ?></td>
+                                    <td>
+                                        <form action="remove_from_cart.php" method="POST" style="display: inline;">
+                                            <input type="hidden" name="cart_id" value="<?php echo $item['cart_id']; ?>">
+                                            <button type="submit" class="remove-btn">X Remove</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                    <div class="cart-footer">
+                        <a href="products.php" class="back-to-shopping">&larr; Back to shopping</a>
+                        <div class="total-price">
+                            Total Price: <span>RM <?php echo number_format(array_sum(array_map(fn($item) => $item['price'] * $item['quantity'], $cartItems)), 2); ?></span>
+                        </div>
+                        <a href="checkout.php" class="checkout-btn">Check Out</a>
                     </div>
-                    <a href="checkout.php" class="checkout-btn">Check Out</a>
-                </div>
+                <?php else: ?>
+                    <!-- Empty Cart Message -->
+                    <div class="empty-cart">
+                        <h2>Your cart is empty!</h2>
+                        <p>Looks like you haven't added anything to your cart yet.</p>
+                        <a href="products.php" class="back-to-shopping">Start Shopping</a>
+                    </div>
+                <?php endif; ?>
             </div>
-
-
         </div>
     </main>
     <?php include('inc/footer.inc.php'); ?>
 </body>
-
-
 
 </html>
