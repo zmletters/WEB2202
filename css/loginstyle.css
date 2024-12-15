@@ -67,6 +67,7 @@ a {
 }
 
 .container {
+    height: 100%;
     display: flex;
     flex-direction: column;
     width: 35%;
@@ -122,6 +123,7 @@ a {
     border-radius: 90px;
     cursor: pointer;
     border: none;
+    margin-top: 25px;
 }
 
 .sign-in .form-help-text-2 {

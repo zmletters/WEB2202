@@ -73,6 +73,7 @@ a {
     display: flex;
     flex-direction: column;
     width: 35%;
+    height: 100%;
     align-items: center;
     justify-content: center;
 }
@@ -142,6 +143,7 @@ a {
     border-radius: 90px;
     cursor: pointer;
     border: none;
+    margin-top: 25px;
 }
 
 .sign-up .button:hover {

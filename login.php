@@ -68,9 +68,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Check the login:
     list($check, $data) = check_login($dbc, $_POST['email'], $_POST['pass']);
-    echo 'asdfsdasdfasdfasdfasd';
+
     if ($check) { // OK!
-        echo 'asdfsdasdfasdfasdfasd';
         // Set the session data:
         session_start();
         $_SESSION['user_id'] = $data["user_id"];
@@ -86,8 +85,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     mysqli_close($dbc); // Close the database connection.
 
-} else {
-    echo 'form not submitted through post';
 } // End of the main submit conditional.
 
 

@@ -16,11 +16,13 @@ signup
 home
 products
 products-info
-
-admin
-user-profile
-
 about
 contact
+user-profile
+
+admin
+
+
+
 
 beautify

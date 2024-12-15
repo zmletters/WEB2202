@@ -25,10 +25,21 @@ footer .brand-info {
     max-width: 300px;
 }
 
+footer .brand-info a {
+    text-decoration: none;
+}
+
+footer .brand-info span {
+    font-size: 18px;
+    font-weight: bold;
+    color: #000000;
+}
+
 footer .brand-info h3 {
     font-family: 'DM Sans', sans-serif;
     font-size: 32px;
     font-weight: bold;
+    margin-top: 10px;
     margin-bottom: 10px;
     color: #FFFFFF;
 }
@@ -64,5 +75,5 @@ footer .copyright {
     font-size: 14px;
     text-align: center;
     color: #131416;
-    margin-top: 20px;
+    margin-top: 0px;
 }
