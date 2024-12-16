@@ -91,6 +91,60 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_order'])) {
 }
 
 
+// Handle Save Product (Edit Product)
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['save_product'])) {
+    $product_id = intval($_POST['product_id']);
+    $name = trim($_POST['name']);
+    $price = floatval($_POST['price']);
+    $unit = trim($_POST['unit']);
+    $description = trim($_POST['description']);
+    $image_url = trim($_POST['image_url']);
+
+    $stmt = $dbc->prepare("UPDATE products SET name = ?, price = ?, unit = ?, description = ?, image_url = ? WHERE product_id = ?");
+    $stmt->bind_param('sdsssi', $name, $price, $unit, $description, $image_url, $product_id);
+
+    if ($stmt->execute()) {
+        $success_message = "Product updated successfully!";
+    } else {
+        $error_message = "Error updating product: " . $stmt->error;
+    }
+}
+
+// Handle Delete Product
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_product'])) {
+    $product_id = intval($_POST['product_id']);
+
+    $stmt = $dbc->prepare("DELETE FROM products WHERE product_id = ?");
+    $stmt->bind_param('i', $product_id);
+
+    if ($stmt->execute()) {
+        $success_message = "Product deleted successfully!";
+    } else {
+        $error_message = "Error deleting product: " . $stmt->error;
+    }
+}
+
+// Handle Add Product
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_product'])) {
+    $name = trim($_POST['name']);
+    $price = floatval($_POST['price']);
+    $unit = trim($_POST['unit']);
+    $description = trim($_POST['description']);
+    $image_url = trim($_POST['image_url']);
+
+    $stmt = $dbc->prepare("INSERT INTO products (name, price, unit, description, image_url) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param('sdsss', $name, $price, $unit, $description, $image_url);
+
+    if ($stmt->execute()) {
+        $success_message = "Product added successfully!";
+    } else {
+        $error_message = "Error adding product: " . $stmt->error;
+    }
+}
+
+// Fetch all products
+$products = $dbc->query("SELECT * FROM products");
+
 // Fetch all users
 $users = $dbc->query("SELECT * FROM users");
 
@@ -120,121 +174,185 @@ $orders = $dbc->query("SELECT o.id AS order_id, o.user_id, u.first_name, u.last_
     <?php if (!empty($error_message)) echo "<p class='error'>$error_message</p>"; ?>
 
     <!-- Users Table -->
-    <h2>All Users</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Address</th>
-                <th>Phone No</th>
-                <th>Role</th>
-                <th>Registration Date</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php while ($row = $users->fetch_assoc()) : ?>
+    <section>
+        <h2>All Users</h2>
+        <table>
+            <thead>
                 <tr>
-                    <!-- Row with Editable Form -->
-                    <form action="admin.php" method="POST">
-                        <td>
-                            <input type="hidden" name="user_id" value="<?= $row['user_id'] ?>">
-                            <?= $row['user_id'] ?>
-                        </td>
-                        <td>
-                            <input type="text" name="first_name" value="<?= htmlspecialchars($row['first_name']) ?>" required>
-                        </td>
-                        <td>
-                            <input type="text" name="last_name" value="<?= htmlspecialchars($row['last_name']) ?>" required>
-                        </td>
-                        <td>
-                            <input type="email" name="email" value="<?= htmlspecialchars($row['email']) ?>" required>
-                        </td>
-                        <td>
-                            <input type="text" name="address" value="<?= htmlspecialchars($row['address']) ?>">
-                        </td>
-                        <td>
-                            <input type="text" name="phone_no" value="<?= htmlspecialchars($row['phone_no']) ?>">
-                        </td>
-                        <td>
-                            <select name="role" required>
-                                <option value="user" <?= $row['role'] == 'customer' ? 'selected' : '' ?>>Customer</option>
-                                <option value="admin" <?= $row['role'] == 'admin' ? 'selected' : '' ?>>Admin</option>
-                            </select>
-                        </td>
-                        <td>
-                            <?= $row['reg_date'] ?>
-                        </td>
-                        <td>
-                            <button type="submit" name="save_user" class="save-button">Save</button>
-                        </td>
-                    </form>
-                    <!-- Separate Delete Form -->
-                    <form action="admin.php" method="POST">
-                        <td>
-                            <input type="hidden" name="user_id" value="<?= $row['user_id'] ?>">
-                            <button type="submit" name="delete_user" class="delete-button">Delete</button>
-                        </td>
-                    </form>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                    <th>Phone No</th>
+                    <th>Role</th>
+                    <th>Registration Date</th>
+                    <th>Actions</th>
                 </tr>
-            <?php endwhile; ?>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <?php while ($row = $users->fetch_assoc()) : ?>
+                    <tr>
+                        <!-- Row with Editable Form -->
+                        <form action="admin.php" method="POST">
+                            <td>
+                                <input type="hidden" name="user_id" value="<?= $row['user_id'] ?>">
+                                <?= $row['user_id'] ?>
+                            </td>
+                            <td>
+                                <input type="text" name="first_name" value="<?= htmlspecialchars($row['first_name']) ?>" required>
+                            </td>
+                            <td>
+                                <input type="text" name="last_name" value="<?= htmlspecialchars($row['last_name']) ?>" required>
+                            </td>
+                            <td>
+                                <input type="email" name="email" value="<?= htmlspecialchars($row['email']) ?>" required>
+                            </td>
+                            <td>
+                                <input type="text" name="address" value="<?= htmlspecialchars($row['address']) ?>">
+                            </td>
+                            <td>
+                                <input type="text" name="phone_no" value="<?= htmlspecialchars($row['phone_no']) ?>">
+                            </td>
+                            <td>
+                                <select name="role" required>
+                                    <option value="user" <?= $row['role'] == 'customer' ? 'selected' : '' ?>>Customer</option>
+                                    <option value="admin" <?= $row['role'] == 'admin' ? 'selected' : '' ?>>Admin</option>
+                                </select>
+                            </td>
+                            <td>
+                                <?= $row['reg_date'] ?>
+                            </td>
+                            <td>
+                                <button type="submit" name="save_user" class="save-button">Save</button>
+                                <button type="submit" name="delete_user" class="delete-button" formmethod="POST">Delete</button>
+                            </td>
+                        </form>
+                    </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
+    </section>
 
     <!-- Orders Table -->
-    <h2>All Orders</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Order ID</th>
-                <th>User</th>
-                <th>Total Amount</th>
-                <th>Order Date</th>
-                <th>Shipping Address</th>
-                <th>Status</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php while ($order = $orders->fetch_assoc()) : ?>
+    <section>
+        <h2>All Orders</h2>
+        <table>
+            <thead>
                 <tr>
-                    <!-- Row with Editable Form -->
-                    <form action="admin.php" method="POST">
-                        <td>
-                            <input type="hidden" name="order_id" value="<?= $order['order_id'] ?>">
-                            <?= $order['order_id'] ?>
-                        </td>
-                        <td>
-                            <?= htmlspecialchars($order['first_name'] . ' ' . $order['last_name']) ?>
-                        </td>
-                        <td>
-                            RM <?= number_format($order['total_amount'], 2) ?>
-                        </td>
-                        <td>
-                            <?= $order['order_date'] ?>
-                        </td>
-                        <td>
-                            <?= htmlspecialchars($order['shipping_address']) ?>
-                        </td>
-                        <td>
-                            <select name="status" required>
-                                <option value="pending" <?= $order['status'] == 'pending' ? 'selected' : '' ?>>Pending</option>
-                                <option value="shipped" <?= $order['status'] == 'shipped' ? 'selected' : '' ?>>Shipped</option>
-                                <option value="completed" <?= $order['status'] == 'completed' ? 'selected' : '' ?>>Completed</option>
-                                <option value="canceled" <?= $order['status'] == 'canceled' ? 'selected' : '' ?>>Canceled</option>
-                            </select>
-                        </td>
-                        <td>
-                            <button type="submit" name="update_order" class="update-button">Update</button>
-                        </td>
-                    </form>
+                    <th>Order ID</th>
+                    <th>User</th>
+                    <th>Total Amount</th>
+                    <th>Order Date</th>
+                    <th>Shipping Address</th>
+                    <th>Status</th>
+                    <th>Actions</th>
                 </tr>
-            <?php endwhile; ?>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <?php while ($order = $orders->fetch_assoc()) : ?>
+                    <tr>
+                        <!-- Row with Editable Form -->
+                        <form action="admin.php" method="POST">
+                            <td>
+                                <input type="hidden" name="order_id" value="<?= $order['order_id'] ?>">
+                                <?= $order['order_id'] ?>
+                            </td>
+                            <td>
+                                <?= htmlspecialchars($order['first_name'] . ' ' . $order['last_name']) ?>
+                            </td>
+                            <td>
+                                RM <?= number_format($order['total_amount'], 2) ?>
+                            </td>
+                            <td>
+                                <?= $order['order_date'] ?>
+                            </td>
+                            <td>
+                                <?= htmlspecialchars($order['shipping_address']) ?>
+                            </td>
+                            <td>
+                                <select name="status" required>
+                                    <option value="pending" <?= $order['status'] == 'pending' ? 'selected' : '' ?>>Pending</option>
+                                    <option value="shipped" <?= $order['status'] == 'shipped' ? 'selected' : '' ?>>Shipped</option>
+                                    <option value="completed" <?= $order['status'] == 'completed' ? 'selected' : '' ?>>Completed</option>
+                                    <option value="canceled" <?= $order['status'] == 'canceled' ? 'selected' : '' ?>>Canceled</option>
+                                </select>
+                            </td>
+                            <td>
+                                <button type="submit" name="update_order" class="update-button">Update</button>
+                            </td>
+                        </form>
+                    </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
+    </section>
+    <section>
+        <h2>All Products</h2>
+        <!-- Add Product Form -->
+        <form action="admin.php" method="POST" class="add-form">
+            <input type="text" name="name" placeholder="Name" required>
+            <input type="number" step="0.01" name="price" placeholder="Price" required>
+            <input type="text" name="unit" placeholder="Unit (e.g., kg, pcs)" required>
+            <input type="text" name="description" placeholder="Description">
+            <input type="text" name="image_url" placeholder="Image URL">
+            <button type="submit" name="add_product" class="save-button">Add Product</button>
+        </form>
+
+        <!-- Products Table -->
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Unit</th>
+                    <th>Description</th>
+                    <th>Image URL</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php while ($row = $products->fetch_assoc()) : ?>
+                    <tr>
+                        <!-- Row with Editable Form -->
+                        <form action="admin.php" method="POST">
+                            <td>
+                                <input type="hidden" name="product_id" value="<?= $row['product_id'] ?>">
+                                <?= $row['product_id'] ?>
+                            </td>
+                            <td>
+                                <input type="text" name="name" value="<?= htmlspecialchars($row['name']) ?>" required>
+                            </td>
+                            <td>
+                                <input type="number" step="0.01" name="price" value="<?= $row['price'] ?>" required>
+                            </td>
+                            <td>
+                                <input type="text" name="unit" value="<?= htmlspecialchars($row['unit']) ?>" required>
+                            </td>
+                            <td>
+                                <input type="text" name="description" value="<?= htmlspecialchars($row['description']) ?>">
+                            </td>
+                            <td>
+                                <input type="text" name="image_url" value="<?= htmlspecialchars($row['image_url']) ?>">
+                            </td>
+                            <td>
+                                <button type="submit" name="save_product" class="save-button">Save</button>
+                            </td>
+                        </form>
+                        <!-- Separate Delete Form -->
+                        <form action="admin.php" method="POST">
+                            <td>
+                                <input type="hidden" name="product_id" value="<?= $row['product_id'] ?>">
+                                <button type="submit" name="delete_product" class="delete-button">Delete</button>
+                            </td>
+                        </form>
+                    </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
+    </section>
 </body>
 
 </html>

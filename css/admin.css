@@ -11,6 +11,17 @@ h1,
 h2 {
     color: #2b542c;
     text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Section Styles */
+section {
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
 }
 
 /* Success and Error Messages */
@@ -86,4 +97,92 @@ button {
 
 .delete-button:hover {
     background-color: #c0392b;
+}
+
+.update-button {
+    background-color: #3498db;
+    color: #fff;
+}
+
+.update-button:hover {
+    background-color: #217dbb;
+}
+
+/* Align buttons inside table cells */
+table td form {
+    display: inline-block;
+    /* Keep forms inline within table cells */
+    margin: 0;
+    /* Remove extra spacing */
+}
+
+table td {
+    vertical-align: middle;
+    /* Ensure buttons align properly with the text */
+}
+
+/* Spacing and alignment for Save and Delete buttons */
+.save-button,
+.delete-button {
+    margin: 5px 0;
+    /* Consistent spacing between buttons */
+    display: block;
+    /* Stack buttons vertically within the cell */
+    width: 100%;
+    /* Make buttons fit the cell width */
+}
+
+/* Add Form Styles */
+.add-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.add-form input,
+.add-form select,
+.add-form button,
+.add-form textarea {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* Larger Textarea for Product Description */
+.add-form textarea {
+    grid-column: span 2;
+    height: 100px;
+    resize: vertical;
+}
+
+/* Section Header */
+.section-header {
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #2b542c;
+    border-bottom: 2px solid #eef4ea;
+    padding-bottom: 5px;
+}
+
+/* Section Spacing */
+section+section {
+    margin-top: 40px;
+}
+
+/* Responsive Table and Buttons */
+@media (max-width: 768px) {
+
+    table th,
+    table td {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    button {
+        font-size: 10px;
+        padding: 6px 10px;
+    }
 }
