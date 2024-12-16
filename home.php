@@ -104,6 +104,18 @@ require('mysqli_connect.php');
         </div>
     </div>
 
+    <!-- Impact of Buying Section -->
+    <div class="impact-buying-section">
+        <h2>Your Purchase Makes a Difference</h2>
+        <p>For every vegetable or product you purchase, you're not just nourishing yourself, but also supporting:</p>
+        <ul>
+            <li>Farmers in sustainable and fair-trade practices</li>
+            <li>Local food banks providing meals to families in need</li>
+            <li>Efforts to reduce food waste and promote eco-friendly farming</li>
+        </ul>
+        <p class="thank-you-message">Thank you for being a part of the movement to create a hunger-free world!</p>
+    </div>
+
 
     <!-- Footer -->
     <?php include('inc/footer.inc.php'); ?>

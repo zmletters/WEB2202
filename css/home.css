@@ -358,3 +358,47 @@ body {
     font-size: 14px;
     color: #555;
 }
+
+
+/* Impact Buying Section */
+.impact-buying-section {
+    background-color: #fef7e6;
+    padding: 30px 20px;
+    text-align: center;
+    margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+}
+
+.impact-buying-section h2 {
+    color: #2b542c;
+    margin-bottom: 15px;
+    font-size: 24px;
+}
+
+.impact-buying-section p {
+    color: #555;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.impact-buying-section ul {
+    list-style-type: disc;
+    text-align: left;
+    margin: 0 auto 20px;
+    padding-left: 20px;
+    max-width: 800px;
+    color: #555;
+    font-size: 16px;
+}
+
+.impact-buying-section ul li {
+    margin-bottom: 10px;
+}
+
+.impact-buying-section .thank-you-message {
+    font-size: 18px;
+    color: #d35400;
+    font-weight: bold;
+}
