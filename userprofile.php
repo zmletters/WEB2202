@@ -181,8 +181,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_password'])) {
                 <ul>
                     <li><a href="#personal-info" class="active">Personal info</a></li>
                     <li><a href="#login-security">Login and security</a></li>
-                    <!-- <li><a href="#">My payments</a></li>
-                    <li><a href="#">My orders</a></li> -->
                 </ul>
             </aside>
 
