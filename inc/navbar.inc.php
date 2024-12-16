@@ -25,20 +25,20 @@
             if (!isset($dbc)) {
                 require('mysqli_connect.php');
             }
-            // Database query to fetch cart item count
+            // Database query to fetch the count of distinct products in the cart
             if (isset($_SESSION['user_id'])) {
                 $userId = $_SESSION['user_id'];
-                $query = "SELECT SUM(quantity) AS total_items FROM cart WHERE user_id = ? AND status = 'active'";
+                $query = "SELECT COUNT(DISTINCT product_id) AS total_products FROM cart WHERE user_id = ? AND status = 'active'";
                 $stmt = $dbc->prepare($query);
                 $stmt->bind_param('i', $userId);
                 $stmt->execute();
                 $result = $stmt->get_result();
                 $cartData = $result->fetch_assoc();
-                $totalItems = $cartData['total_items'] ?? 0;
+                $totalProducts = $cartData['total_products'] ?? 0;
 
-                // Display badge only if items exist
-                if ($totalItems > 0) {
-                    echo '<span class="cart-badge">' . $totalItems . '</span>';
+                // Display badge only if there are distinct products
+                if ($totalProducts > 0) {
+                    echo '<span class="cart-badge">' . $totalProducts . '</span>';
                 }
                 $stmt->close();
             }

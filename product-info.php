@@ -4,7 +4,6 @@ require('mysqli_connect.php');
 require('inc/functions.inc.php');
 
 // Handle Add to Cart Logic
-// Handle Add to Cart Logic
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     check_user_logged_in();
 
@@ -15,27 +14,47 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Validate input
     if ($user_id && $product_id && $quantity > 0) {
         // Check if the product with 'active' status already exists in the cart
-        $query = "
-            INSERT INTO cart (user_id, product_id, quantity, status) 
-            VALUES (?, ?, ?, 'active') 
-            ON DUPLICATE KEY UPDATE 
-                quantity = quantity + VALUES(quantity), 
-                status = 'active'
-        ";
-        $stmt = $dbc->prepare($query);
-        $stmt->bind_param('iii', $user_id, $product_id, $quantity);
+        $check_query = "SELECT quantity FROM cart WHERE user_id = ? AND product_id = ? AND status = 'active'";
+        $check_stmt = $dbc->prepare($check_query);
+        $check_stmt->bind_param('ii', $user_id, $product_id);
+        $check_stmt->execute();
+        $check_result = $check_stmt->get_result();
 
-        if ($stmt->execute()) {
-            // Optionally redirect to cart or show a success message
-            header('Location: cart.php'); // Redirect to cart page
-            exit();
+        if ($check_result->num_rows > 0) {
+            // If the product exists, update the quantity
+            $row = $check_result->fetch_assoc();
+            $new_quantity = $row['quantity'] + $quantity;
+
+            $update_query = "UPDATE cart SET quantity = ?, status = 'active' WHERE user_id = ? AND product_id = ?";
+            $update_stmt = $dbc->prepare($update_query);
+            $update_stmt->bind_param('iii', $new_quantity, $user_id, $product_id);
+
+            if ($update_stmt->execute()) {
+                // Redirect to cart page
+                header('Location: cart.php');
+                exit();
+            } else {
+                $error_message = 'Could not update the cart. Please try again later.';
+            }
         } else {
-            $error_message = 'Could not add to cart. Please try again later.';
+            // If the product does not exist, insert a new row
+            $insert_query = "INSERT INTO cart (user_id, product_id, quantity, status) VALUES (?, ?, ?, 'active')";
+            $insert_stmt = $dbc->prepare($insert_query);
+            $insert_stmt->bind_param('iii', $user_id, $product_id, $quantity);
+
+            if ($insert_stmt->execute()) {
+                // Redirect to cart page
+                header('Location: cart.php');
+                exit();
+            } else {
+                $error_message = 'Could not add to the cart. Please try again later.';
+            }
         }
     } else {
         $error_message = 'Invalid product or quantity.';
     }
 }
+
 
 // Fetch Product Details
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {

@@ -12,27 +12,49 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['product_id'])) {
     $quantity = 1; // Adding 1 quantity by default
 
     if ($user_id && $product_id > 0) {
-        // Insert or update the cart
-        $query = "INSERT INTO cart (user_id, product_id, quantity) 
-                  VALUES (?, ?, ?) 
-                  ON DUPLICATE KEY UPDATE quantity = quantity + ?,
-                  status = 'active'";
-        $stmt = $dbc->prepare($query);
-        $stmt->bind_param('iiii', $user_id, $product_id, $quantity, $quantity);
+        // Check if the product is already in the cart with 'active' status
+        $check_query = "SELECT quantity FROM cart WHERE user_id = ? AND product_id = ? AND status = 'active'";
+        $stmt = $dbc->prepare($check_query);
+        $stmt->bind_param('ii', $user_id, $product_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-        if ($stmt->execute()) {
-            // Successfully added to cart, refresh the page
-            header('Location: products.php');
-            exit();
+        if ($result->num_rows > 0) {
+            // If the product is already in the cart, update the quantity
+            $row = $result->fetch_assoc();
+            $new_quantity = $row['quantity'] + $quantity;
+
+            $update_query = "UPDATE cart SET quantity = ? WHERE user_id = ? AND product_id = ? AND status = 'active'";
+            $update_stmt = $dbc->prepare($update_query);
+            $update_stmt->bind_param('iii', $new_quantity, $user_id, $product_id);
+
+            if ($update_stmt->execute()) {
+                // Successfully updated, refresh the page
+                header('Location: products.php');
+                exit();
+            } else {
+                echo '<p>Error: Could not update the cart. Please try again later.</p>';
+            }
         } else {
-            echo '<p>Error: Could not add to cart. Please try again later.</p>';
+            // If the product is not in the cart, insert it
+            $insert_query = "INSERT INTO cart (user_id, product_id, quantity, status) 
+                             VALUES (?, ?, ?, 'active')";
+            $insert_stmt = $dbc->prepare($insert_query);
+            $insert_stmt->bind_param('iii', $user_id, $product_id, $quantity);
+
+            if ($insert_stmt->execute()) {
+                // Successfully added to cart, refresh the page
+                header('Location: products.php');
+                exit();
+            } else {
+                echo '<p>Error: Could not add to the cart. Please try again later.</p>';
+            }
         }
     } else {
         echo '<p>Error: You must be logged in to add to the cart.</p>';
         header('Location: login.php');
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -51,15 +73,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['product_id'])) {
     <!-- Navbar -->
     <?php include('inc/navbar.inc.php'); ?>
     <div class="products">
-
-
-        <!-- Search and Deals Section
-        <div class="search-deals">
-            <div class="search-bar">
-                <input type="text" placeholder="Search for anything...">
-                <button class="search-btn"><img src="img/icon-59.svg" alt="Search"></button>
-            </div>
-        </div> -->
 
         <!-- Product Listing -->
         <h2>All Products</h2>
@@ -100,10 +113,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['product_id'])) {
 
 
     </div>
+    <!-- Footer -->
+    <?php include('inc/footer.inc.php'); ?>
 </body>
 
-<!-- Footer -->
-<?php include('inc/footer.inc.php'); ?>
+
 
 </html>
 
