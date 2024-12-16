@@ -22,6 +22,9 @@
                 <img src="img/shopping-cart-outline.svg" alt="Cart" class="icon">
             </a>
             <?php
+            if (!isset($dbc)) {
+                require('mysqli_connect.php');
+            }
             // Database query to fetch cart item count
             if (isset($_SESSION['user_id'])) {
                 $userId = $_SESSION['user_id'];
