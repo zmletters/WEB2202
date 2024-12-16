@@ -171,18 +171,3 @@ table td {
 section+section {
     margin-top: 40px;
 }
-
-/* Responsive Table and Buttons */
-@media (max-width: 768px) {
-
-    table th,
-    table td {
-        font-size: 12px;
-        padding: 8px;
-    }
-
-    button {
-        font-size: 10px;
-        padding: 6px 10px;
-    }
-}
