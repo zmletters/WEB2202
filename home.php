@@ -86,6 +86,25 @@ require('mysqli_connect.php');
 
     </div>
 
+    <div class="impact-section">
+        <h2>Our Impact</h2>
+        <div class="metrics">
+            <div class="metric">
+                <h3>500+</h3>
+                <p>Meals provided to families</p>
+            </div>
+            <div class="metric">
+                <h3>20+</h3>
+                <p>Local farms supported</p>
+            </div>
+            <div class="metric">
+                <h3>2 Tons</h3>
+                <p>Food waste reduced</p>
+            </div>
+        </div>
+    </div>
+
+
     <!-- Footer -->
     <?php include('inc/footer.inc.php'); ?>
 </body>
